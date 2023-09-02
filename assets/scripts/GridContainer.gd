@@ -58,16 +58,16 @@ func get_inputs():
 		if tile.change_state(tile.State.CROSS):
 			update_hint_panels()
 	
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_pressed("cursor_right"):
 		cursor_pos.x += 1
 		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	elif Input.is_action_just_pressed("ui_left"):
+	elif Input.is_action_just_pressed("cursor_left"):
 		cursor_pos.x -= 1
 		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("cursor_up"):
 		cursor_pos.y -= 1
 		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_just_pressed("cursor_down"):
 		cursor_pos.y += 1
 		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
 	

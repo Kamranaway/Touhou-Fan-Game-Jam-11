@@ -1,18 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8a5xn1xs1muv"]
+[gd_scene load_steps=3 format=3 uid="uid://b8a5xn1xs1muv"]
 
 [ext_resource type="Script" path="res://assets/scripts/Settings.gd" id="1_2ee8n"]
+[ext_resource type="Script" path="res://assets/scripts/KeyMapButton.gd" id="2_wpgrm"]
 
 [node name="PopupPanel" type="PopupPanel"]
 initial_position = 1
-size = Vector2i(608, 334)
+size = Vector2i(608, 345)
 visible = true
 script = ExtResource("1_2ee8n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 604.0
-offset_bottom = 330.0
+offset_bottom = 341.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GridContainer2" type="GridContainer" parent="VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer3/GridContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Master Level:"
+horizontal_alignment = 2
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer/VBoxContainer3/GridContainer2"]
+layout_mode = 2
+text = "100"
+
+[node name="Master" type="HSlider" parent="VBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -87,41 +123,54 @@ columns = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Up:"
+text = "cursor_up:"
 horizontal_alignment = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="up" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "up-arrow"
+script = ExtResource("2_wpgrm")
+binding_action = "cursor_up"
 
 [node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Down:"
+text = "cursor_down:"
 horizontal_alignment = 2
 
-[node name="Button2" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="down" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "down-arrow"
+script = ExtResource("2_wpgrm")
+binding_action = "cursor_down"
 
 [node name="Label3" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Left:"
+text = "cursor_left:"
 horizontal_alignment = 2
 
-[node name="Button3" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="left" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "left-arrow"
+script = ExtResource("2_wpgrm")
+binding_action = "cursor_left"
 
 [node name="Label4" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Right:"
+text = "cursor_right:"
 horizontal_alignment = 2
 
-[node name="Button4" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+[node name="right" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "right-arrow"
+script = ExtResource("2_wpgrm")
+binding_action = "cursor_right"
 
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer3/Master" to="." method="_on_master_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer2/Music" to="." method="_on_music_value_changed"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/up" to="." method="_on_up_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/down" to="." method="_on_down_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/left" to="." method="_on_left_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/right" to="." method="_on_right_button_down"]
