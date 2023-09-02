@@ -1,29 +1,42 @@
 extends MarginContainer
 
+class_name Slot
+
 var current_state = State.EMPTY
 @onready var cross = $Cross
 @onready var fill = $Fill
 
 enum State {
-	EMPTY,
-	FILLED,
-	CROSS
+	EMPTY = 0,
+	FILLED = 1,
+	CROSS = -1
 }
 
+# completely ignores previous state, not to be used for player actions
 func set_state(new_state: State):
 	current_state = new_state
+	toggle_visibility()
+			
+func change_state(state_to_try: State):
+	if state_to_try == State.EMPTY:
+		return false # do nothing if we're not actually intending to change it (i.e. mouseover with no option selected
+	if current_state != State.EMPTY:
+		current_state = State.EMPTY
+	else:	
+		current_state = state_to_try
+	toggle_visibility()
+	return true
 	
-	match (new_state):
+func toggle_visibility():
+	match(current_state):
 		State.EMPTY:
 			cross.visible = false
 			fill.visible = false
 		State.FILLED:
-			cross.visible = true
+			cross.visible = false
 			fill.visible = true
 		State.CROSS:
 			cross.visible = true
 			fill.visible = false
 		_:
-			current_state = State.EMPTY
-			cross.visible = false
-			fill.visible = false
+			print('what the fuck')
