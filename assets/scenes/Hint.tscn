@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://2n33hofdmtvk"]
+
+[ext_resource type="Script" path="res://assets/scripts/Hint.gd" id="1_lme53"]
+
+[node name="Hint" type="MarginContainer"]
+custom_minimum_size = Vector2(40, 40)
+script = ExtResource("1_lme53")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="HintLabel" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "0"
