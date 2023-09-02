@@ -42,6 +42,14 @@ func update_cursor_sprite_position():
 	cursor.position.y += 20
 
 func get_inputs():
+	if Input.is_action_just_pressed("ui_accept"):
+		var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
+		tile.set_state(tile.State.FILLED)
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
+		tile.set_state(tile.State.CROSS)
+	
 	if Input.is_action_just_pressed("ui_right"):
 		cursor_pos.x += 1
 	elif Input.is_action_just_pressed("ui_left"):

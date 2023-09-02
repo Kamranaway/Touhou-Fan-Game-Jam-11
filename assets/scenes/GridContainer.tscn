@@ -17,6 +17,9 @@ offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
 [node name="GridContainer" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(800, 800)
 layout_mode = 2
@@ -24,9 +27,6 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 20
 script = ExtResource("1_8wvwg")
-
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 2
 
 [node name="Cursor" type="Node2D" parent="."]
 
