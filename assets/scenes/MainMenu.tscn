@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgtydc6q45t03"]
+[gd_scene load_steps=4 format=3 uid="uid://dgtydc6q45t03"]
 
 [ext_resource type="Script" path="res://assets/scripts/MainMenu.gd" id="1_puvtr"]
 [ext_resource type="PackedScene" uid="uid://b8a5xn1xs1muv" path="res://assets/scenes/Settings.tscn" id="2_0l4lb"]
+[ext_resource type="Texture2D" uid="uid://b1i6sto2i2fh" path="res://assets/sprites/characters/IMG_0557.png" id="3_08pwb"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -70,6 +71,11 @@ text = "Fuck You"
 
 [node name="Settings" parent="." instance=ExtResource("2_0l4lb")]
 visible = false
+
+[node name="Img0557" type="Sprite2D" parent="."]
+position = Vector2(339, 674)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("3_08pwb")
 
 [connection signal="button_down" from="CenterContainer/VBoxContainer/Start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="CenterContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_button_down"]

@@ -8,6 +8,8 @@
 
 config_version=5
 
+show_default_buttons=false
+
 [application]
 
 config/name="Touhou-Fan-Game-Jam-11"
@@ -28,6 +30,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Touhou-Fan-Game-Jam-11"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tool_button/plugin.cfg")
 
 [input]
 
