@@ -13,7 +13,7 @@ func _process(delta):
 
 
 func _on_start_button_down():
-	get_tree().change_scene_to_file("res://assets/scenes/Puzzle.tscn")
+	get_tree().change_scene_to_file("res://assets/scenes/Levels/LevelBase.tscn")
 
 
 func _on_settings_button_down():

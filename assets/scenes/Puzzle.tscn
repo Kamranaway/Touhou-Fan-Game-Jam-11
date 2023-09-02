@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp2n107kvcm84"]
+[gd_scene load_steps=4 format=3 uid="uid://dp2n107kvcm84"]
 
+[ext_resource type="Script" path="res://assets/scripts/Puzzle.gd" id="1_4vufy"]
 [ext_resource type="PackedScene" uid="uid://vc80bmj6cx5c" path="res://assets/scenes/HintPanel.tscn" id="2_711x8"]
 [ext_resource type="PackedScene" uid="uid://cdxysjfs0abbj" path="res://assets/scenes/GridContainer.tscn" id="3_4dxm1"]
 
-[node name="Control" type="Control"]
+[node name="Puzzle" type="Control"]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
+script = ExtResource("1_4vufy")
 
 [node name="Grid" type="HBoxContainer" parent="."]
 layout_mode = 1

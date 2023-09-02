@@ -30,4 +30,7 @@ expand_mode = 1
 [node name="Fill" type="ColorRect" parent="."]
 visible = false
 layout_mode = 2
+mouse_filter = 1
 color = Color(0, 0, 0, 1)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

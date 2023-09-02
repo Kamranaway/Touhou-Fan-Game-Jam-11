@@ -6,6 +6,7 @@ var cursor_pos = Vector2.ZERO
 @export var size_y := 20
 @onready var slot = preload("res://assets/scenes/Slot.tscn")
 @onready var cursor = get_parent().get_node("Cursor")
+var current_brush = BrushMenu.Brush.FILL
 
 signal update_margin
 

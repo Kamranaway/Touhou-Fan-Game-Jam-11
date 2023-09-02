@@ -16,7 +16,7 @@ enum State {
 func set_state(new_state: State):
 	current_state = new_state
 	toggle_visibility()
-			
+	
 func change_state(state_to_try: State):
 	if state_to_try == State.EMPTY:
 		return false # do nothing if we're not actually intending to change it (i.e. mouseover with no option selected
@@ -40,3 +40,14 @@ func toggle_visibility():
 			fill.visible = false
 		_:
 			print('what the fuck')
+
+
+func _on_mouse_entered():
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		match (get_parent().current_brush):
+			BrushMenu.Brush.FILL:
+				set_state(State.FILLED)
+			BrushMenu.Brush.EMPTY:
+				set_state(State.EMPTY)
+			BrushMenu.Brush.CROSS:
+				set_state(State.CROSS)
