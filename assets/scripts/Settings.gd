@@ -27,19 +27,5 @@ func _on_master_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(value))
 
 
-func _on_up_button_down():
-	up_button.text = "..."
-
-
-func _on_down_button_down():
-	down_button.text = "..."
-
-
-func _on_left_button_down():
-	left_button.text = "..."
-
-
-func _on_right_button_down():
-	right_button.text = "..."
 
 

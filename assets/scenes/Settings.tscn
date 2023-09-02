@@ -5,7 +5,7 @@
 
 [node name="PopupPanel" type="PopupPanel"]
 initial_position = 1
-size = Vector2i(608, 345)
+size = Vector2i(608, 394)
 visible = true
 script = ExtResource("1_2ee8n")
 
@@ -15,10 +15,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 604.0
-offset_bottom = 341.0
+offset_left = -300.0
+offset_top = -193.0
+offset_right = 300.0
+offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -129,7 +129,7 @@ horizontal_alignment = 2
 [node name="up" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "up-arrow"
+text = "Up"
 script = ExtResource("2_wpgrm")
 binding_action = "cursor_up"
 
@@ -141,7 +141,7 @@ horizontal_alignment = 2
 [node name="down" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "down-arrow"
+text = "Down"
 script = ExtResource("2_wpgrm")
 binding_action = "cursor_down"
 
@@ -152,7 +152,7 @@ horizontal_alignment = 2
 
 [node name="left" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "left-arrow"
+text = "Left"
 script = ExtResource("2_wpgrm")
 binding_action = "cursor_left"
 
@@ -163,14 +163,38 @@ horizontal_alignment = 2
 
 [node name="right" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "right-arrow"
+text = "Right"
 script = ExtResource("2_wpgrm")
 binding_action = "cursor_right"
+
+[node name="Label5" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "place_cross:"
+horizontal_alignment = 2
+
+[node name="cross" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "X"
+script = ExtResource("2_wpgrm")
+binding_action = "place_cross"
+
+[node name="Label6" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "place_fill:"
+horizontal_alignment = 2
+
+[node name="fill" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Z"
+script = ExtResource("2_wpgrm")
+binding_action = "place_fill"
 
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer3/Master" to="." method="_on_master_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer2/Music" to="." method="_on_music_value_changed"]
-[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/up" to="." method="_on_up_button_down"]
-[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/down" to="." method="_on_down_button_down"]
-[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/left" to="." method="_on_left_button_down"]
-[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/right" to="." method="_on_right_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/up" to="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/up" method="_on_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/down" to="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/down" method="_on_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/left" to="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/left" method="_on_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/right" to="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/right" method="_on_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/cross" to="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/cross" method="_on_button_down"]
+[connection signal="button_down" from="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/fill" to="VBoxContainer/MarginContainer/VBoxContainer/GridContainer/fill" method="_on_button_down"]

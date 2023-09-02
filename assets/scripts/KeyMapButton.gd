@@ -8,3 +8,7 @@ func _unhandled_input(event):
 			InputMap.action_erase_events(binding_action)
 			InputMap.action_add_event(binding_action, event)
 			text = event.as_text()
+
+
+func _on_button_down():
+	text = "..."

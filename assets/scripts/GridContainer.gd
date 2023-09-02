@@ -46,13 +46,13 @@ func update_cursor_sprite_position():
 	cursor.position.y += 20
 
 func get_inputs():
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("place_fill"):
 		var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
 		#tile.set_state(tile.State.FILLED)
 		if tile.change_state(tile.State.FILLED):
 			update_hint_panels()
 	
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("place_cross"):
 		var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
 		#tile.set_state(tile.State.CROSS)
 		if tile.change_state(tile.State.CROSS):
