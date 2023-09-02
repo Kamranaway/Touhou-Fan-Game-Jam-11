@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdxysjfs0abbj"]
+[gd_scene load_steps=3 format=3 uid="uid://cdxysjfs0abbj"]
 
 [ext_resource type="Script" path="res://assets/scripts/GridContainer.gd" id="1_8wvwg"]
+[ext_resource type="Texture2D" uid="uid://dmjw3jtwrq58t" path="res://assets/sprites/icon.svg" id="2_b3tsl"]
 
 [node name="MarginContainer" type="MarginContainer"]
 custom_minimum_size = Vector2(800, 800)
@@ -26,3 +27,10 @@ script = ExtResource("1_8wvwg")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
+
+[node name="Cursor" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+modulate = Color(0, 0.996078, 0, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_b3tsl")
