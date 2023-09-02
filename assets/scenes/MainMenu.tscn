@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgtydc6q45t03"]
+
+[ext_resource type="Script" path="res://assets/scripts/MainMenu.gd" id="1_puvtr"]
+[ext_resource type="PackedScene" uid="uid://b8a5xn1xs1muv" path="res://assets/scenes/Settings.tscn" id="2_0l4lb"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_puvtr")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="Tutorial" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Tutorial"
+
+[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="Credits" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_right = 35.0
+offset_bottom = 26.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+text = "Fuck You"
+
+[node name="Settings" parent="." instance=ExtResource("2_0l4lb")]
+visible = false
+
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Credits" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_button_down"]
