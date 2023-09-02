@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=3 uid="uid://5yhotfkrawui"]
+
+[ext_resource type="Script" path="res://assets/scripts/gameplay/Dialog.gd" id="1_1nad6"]
+[ext_resource type="AudioStream" uid="uid://563xqepbevmi" path="res://assets/sounds/TextHigh.wav" id="2_8l3sv"]
+[ext_resource type="FontFile" path="res://assets/fonts/Exo2Bold.tres" id="2_hky5r"]
+[ext_resource type="Texture2D" uid="uid://ocfph1mdpcid" path="res://assets/sprites/dialog/dialog.png" id="2_w66vj"]
+[ext_resource type="Texture2D" uid="uid://div88yh28cqmf" path="res://assets/sprites/dialog/pointer.png" id="3_vvevp"]
+[ext_resource type="Script" path="res://assets/scripts/gameplay/DialogConfig.gd" id="4_4u555"]
+[ext_resource type="FontFile" path="res://assets/fonts/Exo2.tres" id="5_51w1e"]
+
+[sub_resource type="Animation" id="Animation_6b8id"]
+resource_name = "PointerAnimation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk66h"]
+_data = {
+"PointerAnimation": SubResource("Animation_6b8id")
+}
+
+[node name="Dialog" type="CenterContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -750.0
+offset_top = -375.0
+offset_right = 750.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_1nad6")
+_dialog_tween_duration = 0.5
+_fast_foward_velocity = 200
+_velocity = 30
+
+[node name="TextSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8l3sv")
+
+[node name="DialogRig" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="ActorName" type="Label" parent="DialogRig"]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.6, 0.36, 0.36, 1)
+theme_override_constants/outline_size = 35
+theme_override_fonts/font = ExtResource("2_hky5r")
+theme_override_font_sizes/font_size = 71
+text = "ActorName"
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogRig"]
+custom_minimum_size = Vector2(1500, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="DialogBox" type="NinePatchRect" parent="DialogRig/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_w66vj")
+region_rect = Rect2(1, 0, 4051, 791)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="DialogMargin" type="MarginContainer" parent="DialogRig/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 13
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 13
+theme_override_constants/margin_bottom = 2
+
+[node name="DialogText" type="RichTextLabel" parent="DialogRig/MarginContainer/DialogMargin"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.36, 0.36, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/normal_font = ExtResource("5_51w1e")
+theme_override_font_sizes/normal_font_size = 60
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Pointer" type="Control" parent="DialogRig/MarginContainer/DialogMargin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="PointerAnimation" type="AnimationPlayer" parent="DialogRig/MarginContainer/DialogMargin/Pointer"]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_jk66h")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="DialogRig/MarginContainer/DialogMargin/Pointer"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_vvevp")
+
+[node name="LowerMargin" type="MarginContainer" parent="DialogRig"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="DialogConfig" type="Node" parent="."]
+script = ExtResource("4_4u555")
+dialog_text_margin_offset_x = 13.0
+dialog_font = ExtResource("5_51w1e")
+actor_name_font = ExtResource("2_hky5r")
+
+[connection signal="sort_children" from="." to="." method="_on_sort_children"]
+[connection signal="pre_sort_children" from="DialogRig" to="." method="_on_dialog_rig_pre_sort_children"]
+[connection signal="sort_children" from="DialogRig" to="." method="_on_dialog_rig_sort_children"]
