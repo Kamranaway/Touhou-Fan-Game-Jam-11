@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsrf2rraabut2"]
 
-[ext_resource type="Texture2D" uid="uid://dmjw3jtwrq58t" path="res://assets/sprites/icon.svg" id="1_cusvq"]
 [ext_resource type="Script" path="res://assets/scripts/Slot.gd" id="1_k1o08"]
+[ext_resource type="Texture2D" uid="uid://cl43wcsx1mdoa" path="res://assets/sprites/cross.png" id="2_a3n8u"]
 
 [node name="1" type="MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -18,7 +18,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k1o08")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Frame" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_cusvq")
+
+[node name="Cross" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_a3n8u")
 expand_mode = 1
+
+[node name="Fill" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+color = Color(0, 0, 0, 1)

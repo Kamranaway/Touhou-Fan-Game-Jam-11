@@ -41,7 +41,7 @@ func update_cursor_sprite_position():
 	cursor.position.x += 20
 	cursor.position.y += 20
 
-func get_cursor_input():
+func get_inputs():
 	if Input.is_action_just_pressed("ui_right"):
 		cursor_pos.x += 1
 	elif Input.is_action_just_pressed("ui_left"):
@@ -57,4 +57,4 @@ func get_cursor_input():
 	update_cursor_sprite_position()
 
 func _process(delta):
-	get_cursor_input()
+	get_inputs()
