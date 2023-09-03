@@ -101,15 +101,62 @@ func update_hint_panels():
 	var board_state = get_board_state()
 	var coord_list = []
 	
-	# column hints
-	var hint_idx = 0
-	var curr_hint = col_hints[hint_idx]
-	var run = 0
+	var col_runs = get_col_runs(board_state)
+	#print(col_runs)
+	
+	var row_runs = get_row_runs(board_state)
+	#print(row_runs)
+	
+func get_col_runs(board_state):
+	var col_runs = []
+	for c in range(size_x):
+		var runs = []
+		var curr = 0
+		var empty = true
+		for r in range(size_y):
+			if empty:
+				if board_state[r][c] == Slot.State.FILLED:
+					runs.append(curr)
+					empty = false
+					curr = 1
+				else:
+					curr = curr + 1 if board_state[r][c] == Slot.State.EMPTY else curr
+			else:
+				if board_state[r][c] == Slot.State.FILLED:
+					curr += 1
+				else:
+					runs.append(curr)
+					empty = true
+					curr = 1 if board_state[r][c] == Slot.State.EMPTY else 0
+		runs.append(curr)
+		col_runs.append(runs)
+	return col_runs
+	
+func get_row_runs(board_state):
+	var row_runs = []
 	for r in range(size_y):
-		#for
-		print('bwah')
-		
-	#print(board_state)
+		var runs = []
+		var curr = 0
+		var empty = true
+		for c in range(size_x):
+			if empty:
+				if board_state[r][c] == Slot.State.FILLED:
+					runs.append(curr)
+					empty = false
+					curr = 1
+				else:
+					curr = curr + 1 if board_state[r][c] == Slot.State.EMPTY else curr
+			else:
+				if board_state[r][c] == Slot.State.FILLED:
+					curr += 1
+				else:
+					runs.append(curr)
+					empty = true
+					curr = 1 if board_state[r][c] == Slot.State.EMPTY else 0
+		runs.append(curr)
+		row_runs.append(runs)
+	return row_runs
+
 	
 # takes a Vector2[]	of (x, y) coord pairs
 func hide_hints_at_coords(coord_list):
