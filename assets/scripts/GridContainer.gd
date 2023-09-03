@@ -101,47 +101,101 @@ func update_hint_panels():
 	var board_state = get_board_state()
 	var col_coord_list = []
 	
+	# begging, PLEADING with you to never look at the internals
+	# of these functions. just don't.
 	var col_runs = get_col_runs(board_state)
-	#print(col_runs)
-	
 	var row_runs = get_row_runs(board_state)
-	#print(row_runs)
 	
-	# column hints
+	# columns 
 	for c in range(size_x):
-		if col_runs[c].size() / 2 == col_hints[c].size():
-			for idx in range(col_hints[c].size()):
-				if col_runs[c][idx/2 + 1] == col_hints[c][idx]:
-					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + idx))
-	
-	#for c in range(size_x):
-	#	col_coord_list.append(Vector2(6, c))
+		var prior_flag = false
+		for i in range(min(col_hints[c].size(), col_runs[c].size()/2)):
+			if col_hints[c][i] == col_runs[c][i*2 + 1]:
+				if (col_hints[c].size() == 1 && col_runs[c].size()/2 == 1):
+					prior_flag = true
+					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+				elif i + 1 == col_hints[c].size():
+					if prior_flag:
+						col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+					continue
+				elif (col_hints[c][i] > col_hints[c][i+1] 
+					|| !check_if_fits(col_runs[c][i*2], col_hints[c][i])):
+					prior_flag = true
+					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+				else:
+					prior_flag = false
 	
 	hide_hints_at_coords(col_coord_list, false)
 	
-	
+func check_if_fits(spaces, size):
+	print(spaces)
+	# spaces starts with EMPTY spaces. odd nums are ignored
+	for i in range(0, spaces.size(), 2):
+		print(spaces[i])
+		if spaces[i] >= size:
+			return true
+	return false
+
+#ugly as fuck but i swear it's gonna be worth it later
+# looks like this:
+#[[spaces, (X's,...)], filled, ...] 
 func get_col_runs(board_state):
 	var col_runs = []
 	for c in range(size_x):
 		var runs = []
+		var non_fill_runs = []
 		var curr = 0
-		var empty = true
+		var state = Slot.State.EMPTY
 		for r in range(size_y):
-			if empty:
-				if board_state[r][c] == Slot.State.FILLED:
-					runs.append(curr)
-					empty = false
-					curr = 1
-				else:
-					curr = curr + 1 if board_state[r][c] == Slot.State.EMPTY else curr
-			else:
-				if board_state[r][c] == Slot.State.FILLED:
-					curr += 1
-				else:
-					runs.append(curr)
-					empty = true
-					curr = 1 if board_state[r][c] == Slot.State.EMPTY else 0
-		runs.append(curr)
+			match(state):
+				Slot.State.FILLED:
+					match(board_state[r][c]):
+						Slot.State.FILLED:
+							curr += 1
+						Slot.State.EMPTY:
+							runs.append(curr)
+							non_fill_runs = []
+							state = Slot.State.EMPTY
+							curr = 0
+						Slot.State.CROSS:
+							runs.append(curr)
+							non_fill_runs = [0]
+							state = Slot.State.CROSS
+							curr = 1
+				Slot.State.EMPTY:
+					match(board_state[r][c]):
+						Slot.State.FILLED:
+							non_fill_runs.append(curr-1)
+							runs.append(non_fill_runs)
+							state = Slot.State.FILLED
+							curr = 1
+						Slot.State.EMPTY:
+							curr += 1
+						Slot.State.CROSS:
+							non_fill_runs.append(curr)
+							#print(non_fill_runs)
+							state = Slot.State.CROSS
+							curr = 1
+				Slot.State.CROSS:
+					match(board_state[r][c]):
+						Slot.State.FILLED:
+							non_fill_runs.append(curr)
+							runs.append(non_fill_runs)
+							state = Slot.State.FILLED
+							curr = 1
+						Slot.State.EMPTY:
+							non_fill_runs.append(curr)
+							#print(non_fill_runs)
+							state = Slot.State.EMPTY
+							curr = 1
+						Slot.State.CROSS:
+							curr += 1
+		if state == Slot.State.FILLED:
+			runs.append(curr)
+		else: 
+			non_fill_runs.append(curr)
+			#print(non_fill_runs)
+			runs.append(non_fill_runs)
 		col_runs.append(runs)
 	return col_runs
 	
@@ -149,24 +203,59 @@ func get_row_runs(board_state):
 	var row_runs = []
 	for r in range(size_y):
 		var runs = []
+		var non_fill_runs = []
 		var curr = 0
-		var empty = true
+		var state = Slot.State.EMPTY
 		for c in range(size_x):
-			if empty:
-				if board_state[r][c] == Slot.State.FILLED:
-					runs.append(curr)
-					empty = false
-					curr = 1
-				else:
-					curr = curr + 1 if board_state[r][c] == Slot.State.EMPTY else curr
-			else:
-				if board_state[r][c] == Slot.State.FILLED:
-					curr += 1
-				else:
-					runs.append(curr)
-					empty = true
-					curr = 1 if board_state[r][c] == Slot.State.EMPTY else 0
-		runs.append(curr)
+			match(state):
+				Slot.State.FILLED:
+					match(board_state[r][c]):
+						Slot.State.FILLED:
+							curr += 1
+						Slot.State.EMPTY:
+							runs.append(curr)
+							non_fill_runs = []
+							state = Slot.State.EMPTY
+							curr = 0
+						Slot.State.CROSS:
+							runs.append(curr)
+							non_fill_runs = [0]
+							state = Slot.State.CROSS
+							curr = 1
+				Slot.State.EMPTY:
+					match(board_state[r][c]):
+						Slot.State.FILLED:
+							non_fill_runs.append(curr-1)
+							runs.append(non_fill_runs)
+							state = Slot.State.FILLED
+							curr = 1
+						Slot.State.EMPTY:
+							curr += 1
+						Slot.State.CROSS:
+							non_fill_runs.append(curr)
+							#print(non_fill_runs)
+							state = Slot.State.CROSS
+							curr = 1
+				Slot.State.CROSS:
+					match(board_state[r][c]):
+						Slot.State.FILLED:
+							non_fill_runs.append(curr)
+							runs.append(non_fill_runs)
+							state = Slot.State.FILLED
+							curr = 1
+						Slot.State.EMPTY:
+							non_fill_runs.append(curr)
+							#print(non_fill_runs)
+							state = Slot.State.EMPTY
+							curr = 1
+						Slot.State.CROSS:
+							curr += 1
+		if state == Slot.State.FILLED:
+			runs.append(curr)
+		else: 
+			non_fill_runs.append(curr)
+			#print(non_fill_runs)
+			runs.append(non_fill_runs)
 		row_runs.append(runs)
 	return row_runs
 
