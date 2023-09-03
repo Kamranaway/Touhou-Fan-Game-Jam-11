@@ -47,18 +47,22 @@ func _on_mouse_entered():
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		match (get_parent().current_brush):
 			BrushMenu.Brush.FILL:
-				set_state(State.FILLED)
+				change_state(State.FILLED)
+				get_parent().update_hint_panels()
 			BrushMenu.Brush.EMPTY:
-				set_state(State.EMPTY)
+				change_state(State.EMPTY)
 			BrushMenu.Brush.CROSS:
-				set_state(State.CROSS)
+				change_state(State.CROSS)
+				get_parent().update_hint_panels()
 
 func _on_texture_button_button_down():
 	match (get_parent().current_brush):
 			BrushMenu.Brush.FILL:
-				set_state(State.FILLED)
+				change_state(State.FILLED)
+				get_parent().update_hint_panels()
 			BrushMenu.Brush.EMPTY:
-				set_state(State.EMPTY)
+				change_state(State.EMPTY)
 			BrushMenu.Brush.CROSS:
-				set_state(State.CROSS)
+				change_state(State.CROSS)
+				get_parent().update_hint_panels()
 	emit_signal("on_click", Vector2(global_position.x + 20, global_position.y + 20))

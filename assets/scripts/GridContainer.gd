@@ -2,11 +2,17 @@ extends GridContainer
 
 var cursor_pos = Vector2.ZERO
 
-@export var size_x := 20
-@export var size_y := 20
+@export var size_x := 15
+@export var size_y := 15
 @onready var slot = preload("res://assets/scenes/Slot.tscn")
 @onready var cursor = get_parent().get_node("Cursor")
-var current_brush = BrushMenu.Brush.FILL
+var current_brush = BrushMenu.Brush.EMPTY
+var entry_method = EntryMethod.KEYBOARD
+
+enum EntryMethod {
+	KEYBOARD,
+	KEYMOUSE
+}
 
 var last_mouse_pos = Vector2.ZERO
 
@@ -58,35 +64,57 @@ func update_cursor_sprite_position():
 	cursor.position.y += 20
 
 func get_inputs():
-	if Input.is_action_just_pressed("place_fill"):
-		var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
-		#tile.set_state(tile.State.FILLED)
-		if tile.change_state(tile.State.FILLED):
-			update_hint_panels()
+	if Input.is_action_just_pressed("swap_input_method_debug"):
+		match (entry_method):
+			EntryMethod.KEYBOARD:
+				entry_method = EntryMethod.KEYMOUSE
+				print('swapped to keymouse')
+			EntryMethod.KEYMOUSE:
+				entry_method = EntryMethod.KEYBOARD
+				print('swapped to keyboard')
 	
-	if Input.is_action_just_pressed("place_cross"):
-		var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
-		#tile.set_state(tile.State.CROSS)
-		if tile.change_state(tile.State.CROSS):
-			update_hint_panels()
-	
-	if Input.is_action_just_pressed("cursor_right"):
-		cursor_pos.x += 1
-		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	elif Input.is_action_just_pressed("cursor_left"):
-		cursor_pos.x -= 1
-		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	if Input.is_action_just_pressed("cursor_up"):
-		cursor_pos.y -= 1
-		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	if Input.is_action_just_pressed("cursor_down"):
-		cursor_pos.y += 1
-		#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
-	
-	cursor_pos.x = clampi(cursor_pos.x, 0, size_x - 1)
-	cursor_pos.y = clampi(cursor_pos.y, 0, size_y - 1)
-	update_cursor_sprite_position()
-
+	match (entry_method):
+		EntryMethod.KEYBOARD:
+			if Input.is_action_just_pressed("place_fill"):
+				var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
+				#tile.set_state(tile.State.FILLED)
+				if tile.change_state(tile.State.FILLED):
+					update_hint_panels()
+			
+			if Input.is_action_just_pressed("place_cross"):
+				var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
+				#tile.set_state(tile.State.CROSS)
+				if tile.change_state(tile.State.CROSS):
+					update_hint_panels()
+			
+			if Input.is_action_just_pressed("cursor_right"):
+				cursor_pos.x += 1
+				#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
+			elif Input.is_action_just_pressed("cursor_left"):
+				cursor_pos.x -= 1
+				#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
+			if Input.is_action_just_pressed("cursor_up"):
+				cursor_pos.y -= 1
+				#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
+			if Input.is_action_just_pressed("cursor_down"):
+				cursor_pos.y += 1
+				#print(get_grid_tile_state(cursor_pos.x, cursor_pos.y))
+			
+			cursor_pos.x = clampi(cursor_pos.x, 0, size_x - 1)
+			cursor_pos.y = clampi(cursor_pos.y, 0, size_y - 1)
+			update_cursor_sprite_position()
+		EntryMethod.KEYMOUSE:
+			if Input.is_action_pressed("place_fill"):
+				current_brush = BrushMenu.Brush.FILL
+				#print('using fill brush')
+			elif Input.is_action_pressed("place_cross"):
+				current_brush = BrushMenu.Brush.CROSS
+				#print('using cross brush')
+			else:
+				current_brush = BrushMenu.Brush.EMPTY
+				#print('using empty brush')
+				
+			
 func update_hint_panels():
 	# get separate nodes for the top and left panels
 	var hint_panel_left
@@ -112,11 +140,13 @@ func update_hint_panels():
 		var hint_size = col_hints[c].size() # used a lot so make it a var
 		# purely empty column
 		if col_runs[c].size() == 1:
+			print('empty col! @c = ' + str(c))
 			# ... AND we were expecting a pure empty column
 			if col_hints[c][0] == 0:
 				col_coord_list.append(Vector2(c, 6))
 			# otherwise just continue
 			continue
+		print('nonzzempty col! @c = ' + str(c))
 		var prior_flag = false
 		# iterate forwards 
 		for i in range(min(hint_size, col_runs[c].size()/2)):
@@ -165,9 +195,11 @@ func update_hint_panels():
 	for r in range(size_y):
 		var hint_size = row_hints[r].size()
 		if row_runs[r].size() == 1:
+			print('empty row! @r = ' + str(r))
 			if col_hints[r][0] == 0:
 				row_coord_list.append(Vector2(6, r))
 			continue
+		print('nonempty row! @r = ' + str(r))
 		var prior_flag = false
 		for i in range(min(hint_size, row_runs[r].size()/2)):
 			if row_hints[r][i] == row_runs[r][i*2 + 1]:
@@ -266,6 +298,7 @@ func get_col_runs(board_state):
 							curr += 1
 		if state == Slot.State.FILLED:
 			runs.append(curr)
+			runs.append([0])
 		else: 
 			non_fill_runs.append(curr)
 			#print(non_fill_runs)
@@ -326,6 +359,7 @@ func get_row_runs(board_state):
 							curr += 1
 		if state == Slot.State.FILLED:
 			runs.append(curr)
+			runs.append([0]) # necessary to avoid crashing against walls later sowwy
 		else: 
 			non_fill_runs.append(curr)
 			#print(non_fill_runs)
@@ -337,7 +371,7 @@ func get_row_runs(board_state):
 func hide_hints_at_coords(col_coord_list, row_coord_list):
 	var need_ungrey = true
 	for panel in get_tree().get_nodes_in_group("hint_panel"):
-		if need_ungrey:
+		if true:
 			panel.ungrey_all()
 			need_ungrey = false
 		if !panel.is_left:
