@@ -100,6 +100,7 @@ func update_hint_panels():
 	var row_hints = hint_panel_top.row_hints
 	var board_state = get_board_state()
 	var col_coord_list = []
+	var row_coord_list = []
 	
 	# begging, PLEADING with you to never look at the internals
 	# of these functions. just don't.
@@ -108,45 +109,103 @@ func update_hint_panels():
 	
 	# columns 
 	for c in range(size_x):
+		var hint_size = col_hints[c].size() # used a lot so make it a var
+		# purely empty column
+		if col_runs[c].size() == 1:
+			# ... AND we were expecting a pure empty column
+			if col_hints[c][0] == 0:
+				col_coord_list.append(Vector2(c, 6))
+			# otherwise just continue
+			continue
 		var prior_flag = false
 		# iterate forwards 
-		for i in range(min(col_hints[c].size(), col_runs[c].size()/2)):
+		for i in range(min(hint_size, col_runs[c].size()/2)):
+			# does the ith group match the ith hint? trust me on the indexing
 			if col_hints[c][i] == col_runs[c][i*2 + 1]:
-				if (col_hints[c].size() == 1 && col_runs[c].size()/2 == 1):
+				# is there only one group AND one hint? easy guarantee
+				if (hint_size == 1 && col_runs[c].size()/2 == 1):
 					prior_flag = true
-					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
-				elif i + 1 == col_hints[c].size():
+					col_coord_list.append(Vector2(c, 7 - hint_size + i))
+				# are we currently considering a match for the final hint?
+				# if so there's no way for us to be mismatching with a next hint
+				elif i + 1 == hint_size:
+					# if prior_flag is set, we know there can be no unknown hints
+					# before or after what we're currently considering, so it's
+					# guaranteed valid at this point. if not, still vague
 					if prior_flag:
-						col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+						col_coord_list.append(Vector2(c, 7 - hint_size + i))
 					continue
+				# otherwise, we must consider if group i could actually be matching with hint i+1;
+				# this is only possible IFF hint i+1 is not smaller than hint i (and thus group i),
+				# AND hint i could feasibly fit in the space LEFT/ABOVE group i (runs[c][i*2])
 				elif (col_hints[c][i] > col_hints[c][i+1] 
 					|| !check_if_fits(col_runs[c][i*2], col_hints[c][i])):
 					#print('this one :)')
 					prior_flag = true
-					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+					col_coord_list.append(Vector2(c, 7 - hint_size + i))
+				# otherwise we are too vague, give up
 				else:
 					prior_flag = false
 		# iterate backwards
-		for i in range(min(col_hints[c].size(), col_runs[c].size()/2)-1, -1, -1):
-			if col_hints[c][i] == col_runs[c][i*2 + 1]:
-				if i == 0:
+		var last_group_index = (col_runs[c].size() / 2) * 2 - 1 # GUARANTEES an odd number
+		for i in range(min(hint_size, col_runs[c].size()/2)):
+			if col_hints[c][hint_size - 1 - i] == col_runs[c][last_group_index - (i*2)]:
+				if i + 1 == hint_size:
 					if prior_flag:
-						col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+						col_coord_list.append(Vector2(c, 6 - i))
 					continue
-				elif (col_hints[c][i] > col_hints[c][i-1] 
-					|| !check_if_fits(col_runs[c][(i+1)*2], col_hints[c][i])):
+				elif (col_hints[c][hint_size - i - 1] > col_hints[c][hint_size - i - 2] 
+					|| !check_if_fits(col_runs[c][last_group_index - (i*2) + 1], col_hints[c][hint_size - i - 1])):
 					prior_flag = true
-					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+					col_coord_list.append(Vector2(c, 6 - i))
+				else:
+					prior_flag = false
+					
+	# rows 
+	for r in range(size_y):
+		var hint_size = row_hints[r].size()
+		if row_runs[r].size() == 1:
+			if col_hints[r][0] == 0:
+				row_coord_list.append(Vector2(6, r))
+			continue
+		var prior_flag = false
+		for i in range(min(hint_size, row_runs[r].size()/2)):
+			if row_hints[r][i] == row_runs[r][i*2 + 1]:
+				if (hint_size == 1 && row_runs[r].size()/2 == 1):
+					prior_flag = true
+					row_coord_list.append(Vector2(7 - hint_size + i, r))
+				elif i + 1 == hint_size:
+					if prior_flag:
+						row_coord_list.append(Vector2(7 - hint_size + i, r))
+					continue
+				elif (row_hints[r][i] > row_hints[r][i+1] 
+					|| !check_if_fits(row_runs[r][i*2], row_hints[r][i])):
+					prior_flag = true
+					row_coord_list.append(Vector2(7 - hint_size + i, r))
+				else:
+					prior_flag = false
+		# iterate backwards
+		var last_group_index = (row_runs[r].size() / 2) * 2 - 1
+		for i in range(min(hint_size, row_runs[r].size()/2)):
+			if row_hints[r][hint_size - 1 - i] == row_runs[r][last_group_index - (i*2)]:
+				if i + 1 == hint_size:
+					if prior_flag:
+						row_coord_list.append(Vector2(6 - i, r))
+					continue
+				elif (row_hints[r][hint_size - i - 1] > row_hints[r][hint_size - i - 2] 
+					|| !check_if_fits(row_runs[r][last_group_index - (i*2) + 1], row_hints[r][hint_size - i - 1])):
+					prior_flag = true
+					row_coord_list.append(Vector2(6 - i, r))
 				else:
 					prior_flag = false
 	
-	hide_hints_at_coords(col_coord_list, false)
-	
+	hide_hints_at_coords(col_coord_list, row_coord_list)
+
 func check_if_fits(spaces, size):
-	print(spaces)
+	#print(spaces)
 	# spaces starts with EMPTY spaces. odd nums are ignored
 	for i in range(0, spaces.size(), 2):
-		print(spaces[i])
+		#print(spaces[i])
 		if spaces[i] >= size:
 			return true
 	return false
@@ -213,7 +272,7 @@ func get_col_runs(board_state):
 			runs.append(non_fill_runs)
 		col_runs.append(runs)
 	return col_runs
-	
+
 func get_row_runs(board_state):
 	var row_runs = []
 	for r in range(size_y):
@@ -274,16 +333,22 @@ func get_row_runs(board_state):
 		row_runs.append(runs)
 	return row_runs
 
-	
 # takes a Vector2[]	of (x, y) coord pairs
 func hide_hints_at_coords(col_coord_list, row_coord_list):
+	var need_ungrey = true
 	for panel in get_tree().get_nodes_in_group("hint_panel"):
-		if !panel.is_left:
+		if need_ungrey:
 			panel.ungrey_all()
+			need_ungrey = false
+		if !panel.is_left:
 			for idx in range(col_coord_list.size()):
 				panel.set_index_grey(col_coord_list[idx].x, col_coord_list[idx].y, true)
-				print('x: ' + str(col_coord_list[idx].x) + ' y: ' + str(col_coord_list[idx].y))
-				
+				#print('x: ' + str(col_coord_list[idx].x) + ' y: ' + str(col_coord_list[idx].y))
+		else:
+			for idx in range(row_coord_list.size()):
+				panel.set_index_grey(row_coord_list[idx].x, row_coord_list[idx].y, true)
+				#print('x: ' + str(row_coord_list[idx].x) + ' y: ' + str(row_coord_list[idx].y))
+
 # strip state of the board into 2d array; saves time for multiple calls
 # and makes it like 20000 times easier to code lol
 func get_board_state():
