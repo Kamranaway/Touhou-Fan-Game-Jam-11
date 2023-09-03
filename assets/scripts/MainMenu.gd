@@ -13,9 +13,9 @@ func _process(delta):
 
 
 func _on_start_button_down():
-	Events.transition_out()
-	Events.load_stage("TestStage1")
-	#get_tree().change_scene_to_file("res://assets/scenes/Levels/LevelBase.tscn")
+	#Events.transition_out()
+	#Events.load_stage("TestStage1")
+	get_tree().change_scene_to_file("res://assets/scenes/Levels/LevelBase.tscn")
 
 
 func _on_settings_button_down():

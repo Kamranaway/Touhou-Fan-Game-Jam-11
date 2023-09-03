@@ -8,6 +8,15 @@ var cursor_pos = Vector2.ZERO
 @onready var cursor = get_parent().get_node("Cursor")
 var current_brush = BrushMenu.Brush.FILL
 
+var last_mouse_pos = Vector2.ZERO
+
+var lock_x = false
+var lock_x_pos = 0
+var lock_y = false
+var lock_y_pos = 0
+
+var mouse_inside = false
+
 signal update_margin
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +38,10 @@ func _ready():
 	for i in range(size_x):
 		for j in range(size_y):
 			var new_slot = slot.instantiate()
-			self.add_child(slot.instantiate())
+			new_slot.connect("on_click", _on_slot_click)
+			self.add_child(new_slot)
+	lock_x = false
+	lock_y = false
 
 func grid_to_index(x: int, y: int):
 	return (y * size_x) + x
@@ -118,3 +130,36 @@ func get_board_state():
 
 func _process(delta):
 	get_inputs()
+	
+	if !Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		lock_x = false
+		lock_y = false
+	last_mouse_pos = get_global_mouse_position()
+
+
+func _on_mouse_entered():
+	mouse_inside = true
+
+func _on_mouse_exited():
+	mouse_inside = false
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		if mouse_inside and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if lock_x == false and lock_y == false:
+				if event.velocity.length() > 500:
+					lock_x_pos = event.global_position.x
+					lock_y_pos = event.global_position.y
+					if event.velocity.x * event.velocity.x > event.velocity.y * event.velocity.y:
+						lock_x = true
+					else:
+						lock_y = true
+			if lock_x:
+				Input.warp_mouse(Vector2(event.global_position.x, lock_y_pos))
+			elif lock_y:
+				Input.warp_mouse(Vector2(lock_x_pos, event.global_position.y))
+
+func _on_slot_click(pos: Vector2):
+	if mouse_inside:
+		if lock_x == false and lock_y == false:
+			Input.warp_mouse(pos)

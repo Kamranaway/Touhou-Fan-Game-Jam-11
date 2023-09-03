@@ -34,3 +34,6 @@ script = ExtResource("1_8wvwg")
 modulate = Color(0, 0.996078, 0, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_b3tsl")
+
+[connection signal="mouse_entered" from="GridContainer" to="GridContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GridContainer" to="GridContainer" method="_on_mouse_exited"]

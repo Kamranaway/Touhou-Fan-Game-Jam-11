@@ -33,4 +33,9 @@ layout_mode = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 2
+mouse_filter = 1
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]

@@ -6,6 +6,8 @@ var current_state = State.EMPTY
 @onready var cross = $Cross
 @onready var fill = $Fill
 
+signal on_click
+
 enum State {
 	EMPTY = 0,
 	FILLED = 1,
@@ -41,7 +43,6 @@ func toggle_visibility():
 		_:
 			print('what the fuck')
 
-
 func _on_mouse_entered():
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		match (get_parent().current_brush):
@@ -51,3 +52,13 @@ func _on_mouse_entered():
 				set_state(State.EMPTY)
 			BrushMenu.Brush.CROSS:
 				set_state(State.CROSS)
+
+func _on_texture_button_button_down():
+	match (get_parent().current_brush):
+			BrushMenu.Brush.FILL:
+				set_state(State.FILLED)
+			BrushMenu.Brush.EMPTY:
+				set_state(State.EMPTY)
+			BrushMenu.Brush.CROSS:
+				set_state(State.CROSS)
+	emit_signal("on_click", Vector2(global_position.x + 20, global_position.y + 20))
