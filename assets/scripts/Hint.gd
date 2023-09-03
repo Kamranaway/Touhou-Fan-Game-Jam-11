@@ -18,4 +18,5 @@ func grey_out(is_grey: bool):
 		self.modulate = Color.WHITE
 
 func _ready():
-	grey_out(true)
+	grey_out(false)
+	set_text_visible(false)
