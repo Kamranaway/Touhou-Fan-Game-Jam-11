@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7n78y5xr7gj5"]
+
+[sub_resource type="GDScript" id="GDScript_vwixe"]
+script/source = "extends StageBase
+
+func stage_script():
+	Events.load_background(\"factory1\")
+	Events.add_actor(\"Kyle\")
+	Events.dialog(\"Kyle\", \"Hello World\")
+	Events.narrate(\"hello\")
+	Events.choice([\"Yes\", \"No\"])
+	Events.narrate(\"hello\")
+	Events.dialog(\"Kyle\", \"Hello World\")
+	Events.response(\"Kyle\", [\"Yes\", \"No\"])
+"
+
+[node name="TestStage" type="Node"]
+script = SubResource("GDScript_vwixe")

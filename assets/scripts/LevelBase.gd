@@ -19,6 +19,7 @@ func _ready():
 
 
 func start_gameplay():
+	Events.transition_in()
 	current_state = LevelState.GAMEPLAY
 
 

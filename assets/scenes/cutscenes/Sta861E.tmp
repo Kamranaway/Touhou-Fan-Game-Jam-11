@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://dbx57a78ks2cv"]
+
+[ext_resource type="Script" path="res://assets/scripts/gameplay/StageController.gd" id="1_8rtcw"]
+[ext_resource type="Script" path="res://assets/scripts/gameplay/Background.gd" id="2_exgho"]
+[ext_resource type="Script" path="res://assets/scripts/gameplay/Actors.gd" id="2_ugthb"]
+[ext_resource type="Script" path="res://assets/scripts/gameplay/SFXPlayer.gd" id="3_cqegf"]
+[ext_resource type="PackedScene" uid="uid://coa3dd55rff5e" path="res://assets/scenes/gameplay/Dialog.tscn" id="4_kpafm"]
+[ext_resource type="PackedScene" uid="uid://cewirj5j643q6" path="res://assets/scenes/actors/Narrator.tscn" id="4_q26yr"]
+[ext_resource type="PackedScene" uid="uid://bte4oxp8mp5c" path="res://assets/scenes/transitions/FadeTransition.tscn" id="9_mkii1"]
+
+[sub_resource type="GDScript" id="GDScript_qf5ll"]
+script/source = "extends Node
+
+class_name Transition
+
+signal transition_complete
+
+var _transition_list = []
+
+const TRANSITION_DIRECTORY = \"res://assets/scenes/transitions/\"
+
+
+func _ready():
+	var dir = DirAccess.open(TRANSITION_DIRECTORY)
+	var files = dir.get_files()
+	
+	for file in files:
+		_transition_list.append(file)
+		assert(file.ends_with(\".tscn\"), file.get_basename() + \" is not a scene\")
+	
+	assert(len(_transition_list) > 0, \"No transitions found \\n Please add a transition to \" + dir.get_current_dir())
+
+
+func transition_in():
+	get_child(0).start(true)
+	await get_child(0).transition_complete
+	emit_signal(\"transition_complete\")
+
+
+func transition_out():
+	get_child(0).start()
+	await get_child(0).transition_complete
+	emit_signal(\"transition_complete\")
+
+
+func set_transition(transition_name):
+	get_child(0).queue_free()
+	
+	for _file in _transition_list:
+		if _file.get_basename() == transition_name:
+			StageController.Transition.add_child(load(TRANSITION_DIRECTORY + _file).instantiate())
+			return
+	assert(false, \"Transition \" + transition_name + \" not found\")
+"
+
+[node name="Stage" type="Node"]
+script = ExtResource("1_8rtcw")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_exgho")
+
+[node name="Actors" type="Node" parent="."]
+script = ExtResource("2_ugthb")
+
+[node name="Narrator" parent="Actors" instance=ExtResource("4_q26yr")]
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("3_cqegf")
+
+[node name="Dialog" parent="." instance=ExtResource("4_kpafm")]
+
+[node name="Transition" type="Node" parent="."]
+script = SubResource("GDScript_qf5ll")
+
+[node name="FadeTransition" parent="Transition" instance=ExtResource("9_mkii1")]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://2p6aqe7wouxc"]
+
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="1_wvf82"]
+[ext_resource type="FontFile" path="res://assets/fonts/Exo2.tres" id="2_jlw00"]
+[ext_resource type="FontFile" path="res://assets/fonts/Exo2Bold.tres" id="3_rsm34"]
+
+[node name="Actor" type="Sprite2D"]
+script = ExtResource("1_wvf82")
+theme_color = Color(0, 0.831373, 0.835294, 1)
+dialog_font = ExtResource("2_jlw00")
+actor_name_font = ExtResource("3_rsm34")

@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwn4i6lxpfej3"]
+
+[ext_resource type="Texture2D" uid="uid://dc1uoijjqwtnx" path="res://assets/textures/ui/NewSave.png" id="1_gf5ib"]
+[ext_resource type="FontFile" path="res://assets/fonts/Exo2Bold.tres" id="2_84vsx"]
+
+[sub_resource type="GDScript" id="GDScript_xoeg3"]
+script/source = "extends CenterContainer
+
+
+@onready var label = $MarginContainer2/Panel/VBoxContainer/Label2
+@onready var slot = $MarginContainer2/Panel/VBoxContainer/Label
+@onready var tex_rect = $MarginContainer2/Panel/VBoxContainer/MarginContainer/TextureRect
+var save_id = 0
+
+
+func _on_button_button_down():
+	GlobalData.selected_slot = save_id
+"
+
+[node name="SaveSlot" type="CenterContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_xoeg3")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(480, 320)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/Panel"]
+layout_mode = 2
+offset_right = 480.0
+offset_bottom = 320.0
+theme_override_constants/separation = -5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_gf5ib")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="MarginContainer2/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_84vsx")
+theme_override_font_sizes/font_size = 22
+text = "No Data"
+
+[node name="Label" type="Label" parent="MarginContainer2/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_84vsx")
+theme_override_font_sizes/font_size = 22
+text = "Slot 0"
+
+[node name="Button" type="Button" parent="MarginContainer2"]
+layout_mode = 2
+flat = true
+
+[connection signal="button_down" from="MarginContainer2/Button" to="." method="_on_button_button_down"]

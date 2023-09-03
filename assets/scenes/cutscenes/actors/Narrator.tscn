@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cewirj5j643q6"]
+
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="1_pmijj"]
+
+[node name="Narrator" type="Sprite2D"]
+script = ExtResource("1_pmijj")
+actor_name = "Narrator"

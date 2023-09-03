@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbmwujplsff6m"]
+
+[ext_resource type="FontFile" path="res://assets/fonts/Exo2.tres" id="1_5eb5y"]
+
+[node name="ChoiceButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_5eb5y")
+theme_override_font_sizes/font_size = 60
+text = "Choice"
+metadata/index = 0
