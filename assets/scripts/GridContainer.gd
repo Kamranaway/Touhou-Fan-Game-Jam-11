@@ -109,6 +109,7 @@ func update_hint_panels():
 	# columns 
 	for c in range(size_x):
 		var prior_flag = false
+		# iterate forwards 
 		for i in range(min(col_hints[c].size(), col_runs[c].size()/2)):
 			if col_hints[c][i] == col_runs[c][i*2 + 1]:
 				if (col_hints[c].size() == 1 && col_runs[c].size()/2 == 1):
@@ -120,6 +121,20 @@ func update_hint_panels():
 					continue
 				elif (col_hints[c][i] > col_hints[c][i+1] 
 					|| !check_if_fits(col_runs[c][i*2], col_hints[c][i])):
+					#print('this one :)')
+					prior_flag = true
+					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+				else:
+					prior_flag = false
+		# iterate backwards
+		for i in range(min(col_hints[c].size(), col_runs[c].size()/2)-1, -1, -1):
+			if col_hints[c][i] == col_runs[c][i*2 + 1]:
+				if i == 0:
+					if prior_flag:
+						col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
+					continue
+				elif (col_hints[c][i] > col_hints[c][i-1] 
+					|| !check_if_fits(col_runs[c][(i+1)*2], col_hints[c][i])):
 					prior_flag = true
 					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + i))
 				else:
