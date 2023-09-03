@@ -99,13 +99,26 @@ func update_hint_panels():
 	var col_hints = hint_panel_top.col_hints
 	var row_hints = hint_panel_top.row_hints
 	var board_state = get_board_state()
-	var coord_list = []
+	var col_coord_list = []
 	
 	var col_runs = get_col_runs(board_state)
 	#print(col_runs)
 	
 	var row_runs = get_row_runs(board_state)
 	#print(row_runs)
+	
+	# column hints
+	for c in range(size_x):
+		if col_runs[c].size() / 2 == col_hints[c].size():
+			for idx in range(col_hints[c].size()):
+				if col_runs[c][idx/2 + 1] == col_hints[c][idx]:
+					col_coord_list.append(Vector2(c, 7 - col_hints[c].size() + idx))
+	
+	#for c in range(size_x):
+	#	col_coord_list.append(Vector2(6, c))
+	
+	hide_hints_at_coords(col_coord_list, false)
+	
 	
 func get_col_runs(board_state):
 	var col_runs = []
@@ -159,8 +172,13 @@ func get_row_runs(board_state):
 
 	
 # takes a Vector2[]	of (x, y) coord pairs
-func hide_hints_at_coords(coord_list):
-	pass
+func hide_hints_at_coords(col_coord_list, row_coord_list):
+	for panel in get_tree().get_nodes_in_group("hint_panel"):
+		if !panel.is_left:
+			panel.ungrey_all()
+			for idx in range(col_coord_list.size()):
+				panel.set_index_grey(col_coord_list[idx].x, col_coord_list[idx].y, true)
+				print('x: ' + str(col_coord_list[idx].x) + ' y: ' + str(col_coord_list[idx].y))
 				
 # strip state of the board into 2d array; saves time for multiple calls
 # and makes it like 20000 times easier to code lol

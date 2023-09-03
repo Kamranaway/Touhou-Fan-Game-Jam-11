@@ -31,6 +31,15 @@ func set_index_visible(pos_x: int, pos_y: int, is_visible: bool):
 	var board_size = hint_panel_size if !is_left else left_board_size
 	var target_index = pos_x * board_size + pos_y
 	$GridContainer.get_child(target_index).set_text_visible(is_visible)
+	
+func set_index_grey(pos_x: int, pos_y: int, is_grey: bool):
+	var board_size = hint_panel_size if !is_left else left_board_size
+	var target_index = pos_y * board_size + pos_x
+	$GridContainer.get_child(target_index).grey_out(is_grey)
+	
+func ungrey_all():
+	for child in $GridContainer.get_children():
+		child.grey_out(false)
 
 func clear():
 	for child in $GridContainer.get_children():
@@ -73,7 +82,7 @@ func write_hints():
 			for i in range(col_hints[col].size()):
 				set_index_str(col, i + (7 - col_hints[col].size()), str(col_hints[col][i]))
 	else:
-		print(row_hints)
+		#print(row_hints)
 		for row in range(row_hints.size()):
 			for i in range(row_hints[row].size()):
 				set_index_str(i + (7 - row_hints[row].size()), row, str(row_hints[row][i]))
