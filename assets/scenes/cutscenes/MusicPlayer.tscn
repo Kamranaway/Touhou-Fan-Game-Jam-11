@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccea54k0i03eh"]
+[gd_scene load_steps=3 format=3 uid="uid://ccea54k0i03eh"]
 
 [ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/MusicPlayer.gd" id="1_26vv2"]
+[ext_resource type="AudioStream" uid="uid://yx0civ51nep2" path="res://assets/sounds/music/puzzletheme.wav" id="2_u4yah"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 script = ExtResource("1_26vv2")
+track_list = Array[AudioStream]([ExtResource("2_u4yah")])
