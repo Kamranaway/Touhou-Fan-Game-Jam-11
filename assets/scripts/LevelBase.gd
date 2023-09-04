@@ -28,10 +28,6 @@ func start_gameplay():
 	game_board.start_game(puzzle_data.TEST_PUZZLE)
 	#call_deferred('game_board_start')
 
-#func game_board_start():
-	#game_board.
-	#game_board.start_game(solution)
-
 func _on_brush_menu_brush_updated(new_brush):
 	current_brush = new_brush
 	puzzle.tiles.current_brush = new_brush

@@ -5,7 +5,7 @@ script/source = "extends StageBase
 
 func stage_script():
 	#init
-	Events.load_background(\"factory1\")
+	Events.load_background(\"puzzle_bg\")
 	Events.add_actor(\"TestActor\")
 	
 	Events.transition_in()

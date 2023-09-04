@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ld336rjkdv4g"
-path="res://.godot/imported/factory1.png-a6ee76ae604ae1167694200122000ec6.ctex"
+uid="uid://0bpdjtt6vb5b"
+path="res://.godot/imported/puzzle_bg.png-bf893271d48a83355a8bc0f7f309eb94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/factory1.png"
-dest_files=["res://.godot/imported/factory1.png-a6ee76ae604ae1167694200122000ec6.ctex"]
+source_file="res://assets/sprites/backgrounds/puzzle_bg.png"
+dest_files=["res://.godot/imported/puzzle_bg.png-bf893271d48a83355a8bc0f7f309eb94.ctex"]
 
 [params]
 

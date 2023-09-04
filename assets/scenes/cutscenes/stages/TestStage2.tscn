@@ -5,13 +5,9 @@ script/source = "extends StageBase
 
 func stage_script():
 	#init
-	Events.load_background(\"factory1\")
-	Events.add_actor(\"Kyle\")
+	Events.load_background(\"puzzle_bg\")
 	
 	Events.transition_in()
-	
-	Events.dialog(\"Kyle\", \"Meow\")
-	Events.transition_out()
 	Events.change_scene(\"res://assets/scenes/levels/LevelBase.tscn\")
 "
 

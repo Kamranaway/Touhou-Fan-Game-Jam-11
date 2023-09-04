@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2imr8tfwt64k"
-path="res://.godot/imported/factory2.png-e999b05ccf8361b8c7428a11befd4da5.ctex"
+uid="uid://bbb1livjccxdm"
+path="res://.godot/imported/Tile Bad.png-e8a5827a125b0e7f9bbd543580e7298b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/factory2.png"
-dest_files=["res://.godot/imported/factory2.png-e999b05ccf8361b8c7428a11befd4da5.ctex"]
+source_file="res://assets/sprites/Tile Bad.png"
+dest_files=["res://.godot/imported/Tile Bad.png-e8a5827a125b0e7f9bbd543580e7298b.ctex"]
 
 [params]
 
