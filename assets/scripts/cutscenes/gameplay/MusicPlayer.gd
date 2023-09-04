@@ -14,7 +14,7 @@ var song_name = ""
 
 func start_track(index):
 	stream = track_list[index]
-	track_list[index]._get_stream_name()
+	track_list[index]
 	play()
 
 func stop_track():
