@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://assets/scripts/LevelBase.gd" id="1_0suwq"]
 [ext_resource type="PackedScene" uid="uid://dp2n107kvcm84" path="res://assets/scenes/Puzzle.tscn" id="2_h5j4y"]
-[ext_resource type="PackedScene" path="res://assets/scenes/BrushMenu.tscn" id="3_8bxj8"]
-[ext_resource type="PackedScene" path="res://assets/scenes/Timer.tscn" id="4_uvmx4"]
+[ext_resource type="PackedScene" uid="uid://bjej3sg8x5qid" path="res://assets/scenes/BrushMenu.tscn" id="3_8bxj8"]
+[ext_resource type="PackedScene" uid="uid://cxe3afp8xt84o" path="res://assets/scenes/Timer.tscn" id="4_uvmx4"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rbp42"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_0mnk1"]
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_0suwq")
@@ -13,7 +13,7 @@ script = ExtResource("1_0suwq")
 [node name="Puzzle" parent="." instance=ExtResource("2_h5j4y")]
 
 [node name="BrushMenu" parent="." instance=ExtResource("3_8bxj8")]
-button_group = SubResource("ButtonGroup_rbp42")
+button_group = SubResource("ButtonGroup_0mnk1")
 
 [node name="Timer" parent="." instance=ExtResource("4_uvmx4")]
 

@@ -65,7 +65,5 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="solved" from="Grid/VBoxContainer/VFlowContainer/GridContainer" to="." method="_on_grid_container_solved"]
-
 [editable path="Grid/VBoxContainer/VFlowContainer/LeftHintPanel"]
 [editable path="Grid/VBoxContainer/VFlowContainer/GridContainer"]

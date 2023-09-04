@@ -4,10 +4,10 @@ class_name LevelBase
 
 var current_state = LevelState.INIT 
 var current_brush = BrushMenu.Brush.FILL
-@onready var game_board = $Puzzle/Grid/VBoxContainer/VFlowContainer/GridContainer/GridContainer
 @onready var puzzle = $Puzzle
 @onready var brush_menu = $BrushMenu
 @onready var timer = $Timer
+@onready var game_board = $Puzzle/Grid/VBoxContainer/VFlowContainer/GridContainer/GridContainer
 
 enum LevelState {
 	INIT, #Initialization phase
@@ -41,6 +41,7 @@ func _ready():
 func start_gameplay():
 	Events.transition_in()
 	current_state = LevelState.GAMEPLAY
+	game_board.start_game(TEST_PUZZLE)
 	#call_deferred('game_board_start')
 
 #func game_board_start():

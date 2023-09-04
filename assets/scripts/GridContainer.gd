@@ -45,16 +45,10 @@ const TEST_PUZZLE = [
 	[1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
 	[1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
 	[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0]]
-
-
-func _init(solution):
-	pass
-	
-func fuck():
-	print('ballz')
 	
 func _ready():
-	start_game(solution)
+	#start_game(solution)
+	pass
 
 func start_game(_solution):
 	solution = _solution
@@ -79,6 +73,7 @@ func start_game(_solution):
 			self.add_child(new_slot)
 	lock_x = false
 	lock_y = false
+	current_brush = BrushMenu.Brush.FILL
 
 func grid_to_index(x: int, y: int):
 	return (y * size_x) + x

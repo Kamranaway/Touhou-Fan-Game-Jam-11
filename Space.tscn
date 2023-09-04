@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2pfmv8jyrayy"]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/Space.png" id="1_nc1fo"]
+[ext_resource type="Script" path="res://SpaceRotate.gd" id="2_owtaa"]
+[ext_resource type="PackedScene" uid="uid://dgtydc6q45t03" path="res://assets/scenes/MainMenu.tscn" id="3_cs0if"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8vb82"]
+panorama = ExtResource("1_nc1fo")
+
+[sub_resource type="Sky" id="Sky_hkybj"]
+sky_material = SubResource("PanoramaSkyMaterial_8vb82")
+
+[sub_resource type="Environment" id="Environment_6olum"]
+background_mode = 2
+sky = SubResource("Sky_hkybj")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6olum")
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("2_owtaa")
+
+[node name="MainMenu" parent="." instance=ExtResource("3_cs0if")]
