@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cxe3afp8xt84o" path="res://assets/scenes/Timer.tscn" id="4_uvmx4"]
 [ext_resource type="Script" path="res://assets/scripts/PuzzleData.gd" id="6_qms0s"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_fjely"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_iv5db"]
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_0suwq")
@@ -32,7 +32,7 @@ texture = ExtResource("3_a8huv")
 [node name="Puzzle" parent="." instance=ExtResource("2_h5j4y")]
 
 [node name="BrushMenu" parent="." instance=ExtResource("3_8bxj8")]
-button_group = SubResource("ButtonGroup_fjely")
+button_group = SubResource("ButtonGroup_iv5db")
 
 [node name="Timer" parent="." instance=ExtResource("4_uvmx4")]
 
@@ -40,6 +40,7 @@ button_group = SubResource("ButtonGroup_fjely")
 script = ExtResource("6_qms0s")
 
 [connection signal="solved" from="Puzzle" to="." method="_on_puzzle_solved"]
+[connection signal="solved" from="Puzzle/Grid/VBoxContainer/VFlowContainer/GridContainer/GridContainer" to="." method="_on_puzzle_solved"]
 [connection signal="brush_updated" from="BrushMenu" to="." method="_on_brush_menu_brush_updated"]
 
 [editable path="Puzzle"]
