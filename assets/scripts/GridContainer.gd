@@ -4,10 +4,12 @@ signal update_margin
 
 signal solved
 
+const MAX_HINTS = 6
+
 var cursor_pos = Vector2.ZERO
 
-@export var size_x := 15
-@export var size_y := 15
+var size_x
+var size_y
 @onready var slot = preload("res://assets/scenes/Slot.tscn")
 @onready var cursor = get_parent().get_node("Cursor")
 var current_brush = BrushMenu.Brush.EMPTY
@@ -19,32 +21,12 @@ enum EntryMethod {
 }
 
 var last_mouse_pos = Vector2.ZERO
-
 var lock_x = false
 var lock_x_pos = 0
 var lock_y = false
 var lock_y_pos = 0
-
 var mouse_inside = false
-
-var solution = TEST_PUZZLE
-
-const TEST_PUZZLE = [
-	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
-	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
-	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
-	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
-	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,0],
-	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0],
-	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0],
-	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1],
-	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,1],
-	[1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,1 ,1],
-	[1 ,1 ,1 ,1 ,0 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0],
-	[1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
-	[1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
-	[1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
-	[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0]]
+var solution
 	
 func _ready():
 	#start_game(solution)
@@ -52,11 +34,9 @@ func _ready():
 
 func start_game(_solution):
 	solution = _solution
+	size_x = _solution[0].size()
+	size_y = _solution.size()
 	for panel in get_tree().get_nodes_in_group("hint_panel"):
-		if !panel.is_left:
-			panel.hint_panel_size = size_x
-		else:
-			panel.hint_panel_size = size_y
 		panel.update_panel_size(solution)
 	
 	self.columns = size_x
@@ -182,7 +162,7 @@ func update_hint_panels(board_state):
 			print('empty col! @c = ' + str(c))
 			# ... AND we were expecting a pure empty column
 			if col_hints[c][0] == 0:
-				col_coord_list.append(Vector2(c, 6))
+				col_coord_list.append(Vector2(c, MAX_HINTS-1))
 			# otherwise just continue
 			continue
 		print('nonzzempty col! @c = ' + str(c))
@@ -194,7 +174,7 @@ func update_hint_panels(board_state):
 				# is there only one group AND one hint? easy guarantee
 				if (hint_size == 1 && col_runs[c].size()/2 == 1):
 					prior_flag = true
-					col_coord_list.append(Vector2(c, 7 - hint_size + i))
+					col_coord_list.append(Vector2(c, MAX_HINTS - hint_size + i))
 				# are we currently considering a match for the final hint?
 				# if so there's no way for us to be mismatching with a next hint
 				elif i + 1 == hint_size:
@@ -202,7 +182,7 @@ func update_hint_panels(board_state):
 					# before or after what we're currently considering, so it's
 					# guaranteed valid at this point. if not, still vague
 					if prior_flag:
-						col_coord_list.append(Vector2(c, 7 - hint_size + i))
+						col_coord_list.append(Vector2(c, MAX_HINTS - hint_size + i))
 					continue
 				# otherwise, we must consider if group i could actually be matching with hint i+1;
 				# this is only possible IFF hint i+1 is not smaller than hint i (and thus group i),
@@ -211,7 +191,7 @@ func update_hint_panels(board_state):
 					|| !check_if_fits(col_runs[c][i*2], col_hints[c][i])):
 					#print('this one :)')
 					prior_flag = true
-					col_coord_list.append(Vector2(c, 7 - hint_size + i))
+					col_coord_list.append(Vector2(c, MAX_HINTS - hint_size + i))
 				# otherwise we are too vague, give up
 				else:
 					prior_flag = false
@@ -221,12 +201,12 @@ func update_hint_panels(board_state):
 			if col_hints[c][hint_size - 1 - i] == col_runs[c][last_group_index - (i*2)]:
 				if i + 1 == hint_size:
 					if prior_flag:
-						col_coord_list.append(Vector2(c, 6 - i))
+						col_coord_list.append(Vector2(c, MAX_HINTS - 1 - i))
 					continue
 				elif (col_hints[c][hint_size - i - 1] > col_hints[c][hint_size - i - 2] 
 					|| !check_if_fits(col_runs[c][last_group_index - (i*2) + 1], col_hints[c][hint_size - i - 1])):
 					prior_flag = true
-					col_coord_list.append(Vector2(c, 6 - i))
+					col_coord_list.append(Vector2(c, MAX_HINTS - 1 - i))
 				else:
 					prior_flag = false
 					
@@ -236,7 +216,7 @@ func update_hint_panels(board_state):
 		if row_runs[r].size() == 1:
 			print('empty row! @r = ' + str(r))
 			if col_hints[r][0] == 0:
-				row_coord_list.append(Vector2(6, r))
+				row_coord_list.append(Vector2(MAX_HINTS - 1, r))
 			continue
 		print('nonempty row! @r = ' + str(r))
 		var prior_flag = false
@@ -244,15 +224,15 @@ func update_hint_panels(board_state):
 			if row_hints[r][i] == row_runs[r][i*2 + 1]:
 				if (hint_size == 1 && row_runs[r].size()/2 == 1):
 					prior_flag = true
-					row_coord_list.append(Vector2(7 - hint_size + i, r))
+					row_coord_list.append(Vector2(MAX_HINTS - hint_size + i, r))
 				elif i + 1 == hint_size:
 					if prior_flag:
-						row_coord_list.append(Vector2(7 - hint_size + i, r))
+						row_coord_list.append(Vector2(MAX_HINTS - hint_size + i, r))
 					continue
 				elif (row_hints[r][i] > row_hints[r][i+1] 
 					|| !check_if_fits(row_runs[r][i*2], row_hints[r][i])):
 					prior_flag = true
-					row_coord_list.append(Vector2(7 - hint_size + i, r))
+					row_coord_list.append(Vector2(MAX_HINTS - hint_size + i, r))
 				else:
 					prior_flag = false
 		# iterate backwards
@@ -261,12 +241,12 @@ func update_hint_panels(board_state):
 			if row_hints[r][hint_size - 1 - i] == row_runs[r][last_group_index - (i*2)]:
 				if i + 1 == hint_size:
 					if prior_flag:
-						row_coord_list.append(Vector2(6 - i, r))
+						row_coord_list.append(Vector2(MAX_HINTS - 1 - i, r))
 					continue
 				elif (row_hints[r][hint_size - i - 1] > row_hints[r][hint_size - i - 2] 
 					|| !check_if_fits(row_runs[r][last_group_index - (i*2) + 1], row_hints[r][hint_size - i - 1])):
 					prior_flag = true
-					row_coord_list.append(Vector2(6 - i, r))
+					row_coord_list.append(Vector2(MAX_HINTS - 1 - i, r))
 				else:
 					prior_flag = false
 	
