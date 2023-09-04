@@ -1,13 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://macsrq8jykg7"]
+[gd_scene load_steps=4 format=3 uid="uid://vpsolfpaaky2"]
 
 [ext_resource type="PackedScene" uid="uid://bqii02w2dcs6l" path="res://assets/scenes/levels/LevelBase.tscn" id="1_sf40p"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5f681"]
 
+[sub_resource type="GDScript" id="GDScript_y1k10"]
+script/source = "extends Node
+
+const TEST_PUZZLE = [[0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,1] ,
+[0 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,1] ,
+[0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0] ,
+[0 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0] ,
+[0 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,1 ,0 ,0] ,
+[1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,0 ,1] ,
+[1 ,0 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,1] ,
+[1 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,1] ,
+[1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1] ,
+[1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1]]
+"
+
 [node name="LevelBase" instance=ExtResource("1_sf40p")]
+next_puzzle = "res://assets/scenes/levels/Level10.tscn"
 
 [node name="BrushMenu" parent="." index="2"]
 button_group = SubResource("ButtonGroup_5f681")
+
+[node name="PuzzleData" parent="." index="4"]
+script = SubResource("GDScript_y1k10")
 
 [editable path="Puzzle"]
 [editable path="Puzzle/Grid/VBoxContainer/VFlowContainer/LeftHintPanel"]

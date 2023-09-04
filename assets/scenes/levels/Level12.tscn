@@ -1,13 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqlp2mhjwt7qm"]
+[gd_scene load_steps=4 format=3 uid="uid://dby8efsxyr4r"]
 
 [ext_resource type="PackedScene" uid="uid://bqii02w2dcs6l" path="res://assets/scenes/levels/LevelBase.tscn" id="1_cb4ik"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5f681"]
 
+[sub_resource type="GDScript" id="GDScript_y1k10"]
+script/source = "extends Node
+
+const TEST_PUZZLE = [[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0] ,
+[1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1] ,
+[1 ,1 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,1] ,
+[1 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,0 ,0 ,1] ,
+[1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1] ,
+[1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1] ,
+[1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1] ,
+[0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,1] ,
+[0 ,1 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,1 ,0 ,1] ,
+[1 ,1 ,1 ,1 ,1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,1 ,1 ,0] ,
+[1 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,1 ,1 ,0 ,1 ,1] ,
+[1 ,1 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,1 ,0 ,1 ,0 ,1 ,1 ,0] ,
+[0 ,1 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,1 ,0 ,1 ,0 ,0 ,0] ,
+[0 ,0 ,1 ,0 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1] ,
+[0 ,0 ,0 ,0 ,1 ,0 ,1 ,1 ,0 ,1 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,1 ,1]]
+"
+
 [node name="LevelBase" instance=ExtResource("1_cb4ik")]
+next_puzzle = "res://assets/scenes/cutscenes/stages/Chapter4.tscn"
 
 [node name="BrushMenu" parent="." index="2"]
 button_group = SubResource("ButtonGroup_5f681")
+
+[node name="PuzzleData" parent="." index="4"]
+script = SubResource("GDScript_y1k10")
 
 [editable path="Puzzle"]
 [editable path="Puzzle/Grid/VBoxContainer/VFlowContainer/LeftHintPanel"]

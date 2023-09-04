@@ -9,6 +9,7 @@ var current_brush = BrushMenu.Brush.FILL
 @onready var timer = $Timer
 @onready var game_board = $Puzzle/Grid/VBoxContainer/VFlowContainer/GridContainer/GridContainer
 @onready var puzzle_data = $PuzzleData
+@export var next_puzzle = ""
 
 enum LevelState {
 	INIT, #Initialization phase
@@ -35,4 +36,5 @@ func _on_brush_menu_brush_updated(new_brush):
 func _on_puzzle_solved():
 	print('somehow, magically, we did it')
 	var time = timer.stop_timer()
+	get_tree().change_scene_to_file(next_puzzle)
 	

@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://daogq1wp4vh2w"]
+[gd_scene load_steps=3 format=3 uid="uid://cgdjkoekj624b"]
 
 [ext_resource type="PackedScene" uid="uid://bqii02w2dcs6l" path="res://assets/scenes/levels/LevelBase.tscn" id="1_i2xlq"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_5f681"]
 
 [node name="LevelBase" instance=ExtResource("1_i2xlq")]
+next_puzzle = "res://assets/scenes/cutscenes/stages/Chapter1.tscn"
 
 [node name="BrushMenu" parent="." index="2"]
 button_group = SubResource("ButtonGroup_5f681")
