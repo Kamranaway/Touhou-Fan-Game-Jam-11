@@ -36,5 +36,6 @@ func _on_brush_menu_brush_updated(new_brush):
 func _on_puzzle_solved():
 	print('somehow, magically, we did it')
 	var time = timer.stop_timer()
+	Events.transition_out()
 	get_tree().change_scene_to_file(next_puzzle)
 	

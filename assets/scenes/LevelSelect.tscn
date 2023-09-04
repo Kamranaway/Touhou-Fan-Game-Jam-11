@@ -60,7 +60,6 @@ layout_mode = 2
 
 [node name="two" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer2/MarginContainer2"]
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("1_6op2b")
 texture_hover = ExtResource("3_n0ymt")
 texture_disabled = ExtResource("2_ukshp")
@@ -75,7 +74,6 @@ layout_mode = 2
 
 [node name="three" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer3/MarginContainer3"]
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("1_6op2b")
 texture_hover = ExtResource("3_n0ymt")
 texture_disabled = ExtResource("2_ukshp")
@@ -90,13 +88,12 @@ layout_mode = 2
 
 [node name="four" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer4/MarginContainer4"]
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("1_6op2b")
 texture_hover = ExtResource("3_n0ymt")
 texture_disabled = ExtResource("2_ukshp")
 stretch_mode = 3
 
-[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer/MarginContainer/one" to="." method="_on__button_down"]
-[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer2/MarginContainer2/two" to="." method="_on__button_down"]
-[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer3/MarginContainer3/three" to="." method="_on__button_down"]
-[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer4/MarginContainer4/four" to="." method="_on__button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer/MarginContainer/one" to="." method="_on_one_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer2/MarginContainer2/two" to="." method="_on_two_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer3/MarginContainer3/three" to="." method="_on_three_button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer4/MarginContainer4/four" to="." method="_on_four_button_down"]
