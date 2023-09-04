@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://by2wyf7kwroa6" path="res://assets/sprites/tile_bg_thicker.png" id="1_4nick"]
 [ext_resource type="Script" path="res://assets/scripts/GridContainer.gd" id="1_8wvwg"]
+[ext_resource type="Script" path="res://assets/scripts/MarginContainer.gd" id="1_lljmw"]
 [ext_resource type="Texture2D" uid="uid://dmjw3jtwrq58t" path="res://assets/sprites/icon.svg" id="2_b3tsl"]
 
 [node name="MarginContainer" type="MarginContainer"]
@@ -17,6 +18,7 @@ offset_right = 400.0
 offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lljmw")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
