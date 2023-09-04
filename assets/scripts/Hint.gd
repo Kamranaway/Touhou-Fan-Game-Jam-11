@@ -8,6 +8,14 @@ func set_text(new_str: String):
 	else:
 		set_text_visible(true)
 
+func set_edge(is_vertical: bool):
+	if is_vertical:
+		pass
+		# set it to the vertical edge texture
+	else: 
+		pass
+		# horiz. edge texture
+
 func set_text_visible(is_visible: bool):
 	$CenterContainer/HintLabel.visible = is_visible
 	$TextureRect.visible = is_visible

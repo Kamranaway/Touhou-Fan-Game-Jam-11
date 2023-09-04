@@ -4,7 +4,7 @@ signal update_margin
 
 signal solved
 
-const MAX_HINTS = 6
+const MAX_HINTS = 7
 
 var cursor_pos = Vector2.ZERO
 

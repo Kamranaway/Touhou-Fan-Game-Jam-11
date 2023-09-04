@@ -1,7 +1,7 @@
 extends MarginContainer
 
 var side_length
-const MAX_HINTS = 6
+const MAX_HINTS = 7
 
 var hint = preload("res://assets/scenes/Hint.tscn")
 
@@ -12,13 +12,19 @@ var hint = preload("res://assets/scenes/Hint.tscn")
 func update_panel_size(solution):
 	clear()
 	side_length = solution[0].size() if !is_left else solution.size()
-	print(str(side_length) + ' for is_left = ' + str(is_left))
+	#print(str(side_length) + ' for is_left = ' + str(is_left))
 	grid_container.columns = side_length if !is_left else MAX_HINTS
 	for i in range(side_length * MAX_HINTS):
 		grid_container.add_child(hint.instantiate())
 	col_hints = generate_col_hints(solution)
 	row_hints = generate_row_hints(solution)
 	write_hints()
+	
+func set_index_edge(pos_x: int, pos_y: int, is_vertical: bool):
+	print('is_vertical: ' + str(is_vertical) + ' pos_x: ' + str(pos_x) + ' pos_y: ' + str(pos_y))
+	var row_size = side_length if !is_left else MAX_HINTS
+	var target_index = pos_y * row_size + pos_x
+	$GridContainer.get_child(target_index).set_edge(is_vertical)
 
 func set_index_str(pos_x: int, pos_y: int, new_str: String):
 	var row_size = side_length if !is_left else MAX_HINTS
@@ -49,16 +55,20 @@ var row_hints
 
 func write_hints():
 	if !is_left: 
-		print(col_hints)
+		#print(col_hints)
 		for col in range(col_hints.size()):
+			set_index_edge(col, MAX_HINTS - col_hints[col].size(), true)
 			for i in range(col_hints[col].size()):
-				print(str(col) + ", " + str(i + (MAX_HINTS - col_hints[col].size())))
+				#print(str(col) + ", " + str(i + (MAX_HINTS - col_hints[col].size())))
 				set_index_str(col, i + (MAX_HINTS - col_hints[col].size()), str(col_hints[col][i]))
+					
 	else:
 		#print(row_hints)
 		for row in range(row_hints.size()):
+			set_index_edge(MAX_HINTS - row_hints[row].size(), row, false)
 			for i in range(row_hints[row].size()):
 				set_index_str(i + (MAX_HINTS - row_hints[row].size()), row, str(row_hints[row][i]))
+					
 		#for row in range(row_hints.size()):
 			#for i in range(7):
 				#set_index_str(i, row, str(i))
