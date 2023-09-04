@@ -107,6 +107,27 @@ icon = ExtResource("6_5ys5y")
 flat = true
 icon_alignment = 1
 
+[node name="PopupPanel" type="PopupPanel" parent="."]
+initial_position = 1
+size = Vector2i(500, 500)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 496.0
+text = "HOW TO PLAY
+
+In Picross, hints are given above and to the left of the board that tell you where the numbers go.
+Each hint will tell you how many filled-in blocks are in a row. For example, and \"8\" means you have 8 blocks in a row, somewhere in that row/column.
+If there are multiple hints, those groups of blocks appear in the order of the hints. For example, \"5 6\" means you have a group of five, THEN a group of six.
+Cross out blocks that you know aren't filled, and fill in every correct block in order to win!
+
+
+Use M to swap between Keyboard Only (default) and Keyboard And Mouse controls.
+In Keyboard Only, use WASD or the arrow keys to move your cursor, and press Z to fill in a block, and press X to cross it out if you know for sure it isn't filled.
+In Keyboard and Mouse, hold Z to have your clicks fill in blocks and X to have your clicks cross out blocks."
+
 [connection signal="button_down" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="VBoxContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_button_down"]
 [connection signal="button_down" from="VBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_button_down"]

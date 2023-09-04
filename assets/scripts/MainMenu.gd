@@ -25,7 +25,7 @@ func _on_quit_button_down():
 
 
 func _on_tutorial_button_down():
-	pass # Replace with function body.
+	$PopupPanel.visible = true
 
 
 func _on_credits_button_down():
