@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dy5dn4ph467ch" path="res://assets/sprites/puzzle_bg.png" id="3_a8huv"]
 [ext_resource type="PackedScene" uid="uid://cxe3afp8xt84o" path="res://assets/scenes/Timer.tscn" id="4_uvmx4"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_60ufp"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_1ln26"]
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_0suwq")
@@ -31,7 +31,7 @@ texture = ExtResource("3_a8huv")
 [node name="Puzzle" parent="." instance=ExtResource("2_h5j4y")]
 
 [node name="BrushMenu" parent="." instance=ExtResource("3_8bxj8")]
-button_group = SubResource("ButtonGroup_60ufp")
+button_group = SubResource("ButtonGroup_1ln26")
 
 [node name="Timer" parent="." instance=ExtResource("4_uvmx4")]
 

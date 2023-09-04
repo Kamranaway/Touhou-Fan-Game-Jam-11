@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/scripts/MainMenu.gd" id="1_puvtr"]
 [ext_resource type="PackedScene" uid="uid://b8a5xn1xs1muv" path="res://assets/scenes/Settings.tscn" id="2_0l4lb"]
-[ext_resource type="Texture2D" uid="uid://b1i6sto2i2fh" path="res://assets/sprites/characters/IMG_0557.png" id="3_08pwb"]
+[ext_resource type="Texture2D" uid="uid://bvvj3vcivsj0q" path="res://assets/sprites/doresagu menu image.png" id="4_m03nt"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +12,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_puvtr")
+
+[node name="DoresaguMenuImage" type="Sprite2D" parent="."]
+position = Vector2(959, 616)
+texture = ExtResource("4_m03nt")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
@@ -71,11 +75,6 @@ text = "Fuck You"
 
 [node name="Settings" parent="." instance=ExtResource("2_0l4lb")]
 visible = false
-
-[node name="Img0557" type="Sprite2D" parent="."]
-position = Vector2(339, 674)
-scale = Vector2(0.85, 0.85)
-texture = ExtResource("3_08pwb")
 
 [connection signal="button_down" from="CenterContainer/VBoxContainer/Start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="CenterContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_button_down"]
