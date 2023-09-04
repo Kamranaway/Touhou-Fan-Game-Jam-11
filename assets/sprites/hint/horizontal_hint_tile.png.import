@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qh2oejqnhag"
-path="res://.godot/imported/horizontal_hint_tile.png-27d561ca992b0eca9313420fea078f6c.ctex"
+path="res://.godot/imported/horizontal_hint_tile.png-89ecd0ab72f97c4bb7091df2f95f5eee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/horizontal_hint_tile.png"
-dest_files=["res://.godot/imported/horizontal_hint_tile.png-27d561ca992b0eca9313420fea078f6c.ctex"]
+source_file="res://assets/sprites/hint/horizontal_hint_tile.png"
+dest_files=["res://.godot/imported/horizontal_hint_tile.png-89ecd0ab72f97c4bb7091df2f95f5eee.ctex"]
 
 [params]
 

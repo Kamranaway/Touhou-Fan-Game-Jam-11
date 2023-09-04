@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://2n33hofdmtvk"]
+[gd_scene load_steps=6 format=3 uid="uid://2n33hofdmtvk"]
 
 [ext_resource type="Script" path="res://assets/scripts/Hint.gd" id="1_lme53"]
-[ext_resource type="Texture2D" uid="uid://qh2oejqnhag" path="res://assets/sprites/horizontal_hint_tile.png" id="2_cauqs"]
+[ext_resource type="Texture2D" uid="uid://qh2oejqnhag" path="res://assets/sprites/hint/horizontal_hint_tile.png" id="2_t5uby"]
+[ext_resource type="Texture2D" uid="uid://dipdgywnvmp8v" path="res://assets/sprites/hint/horizontal_hint_tile_leftmost.png" id="3_b7sqo"]
+[ext_resource type="Texture2D" uid="uid://cgjwtmasocnox" path="res://assets/sprites/hint/vertical_hint_tile - Copy.png" id="4_gr6v1"]
+[ext_resource type="Texture2D" uid="uid://uv66ju3xpigy" path="res://assets/sprites/hint/vertical_hint_tile_leftmost - Copy.png" id="5_30us5"]
 
 [node name="Hint" type="MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -12,9 +15,21 @@ visible = false
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BlockHint" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_cauqs")
+texture = ExtResource("2_t5uby")
+
+[node name="EdgeHint" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_b7sqo")
+
+[node name="VertBlockHint" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_gr6v1")
+
+[node name="VertEdge" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("5_30us5")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2

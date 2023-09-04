@@ -25,6 +25,7 @@ buses/default_bus_layout="res://assets/resources/default_bus_layout.tres"
 
 StageController="*res://assets/scenes/cutscenes/StageController.tscn"
 MusicPlayer="*res://assets/scenes/cutscenes/MusicPlayer.tscn"
+SaveData="*res://assets/scripts/SaveData.gd"
 
 [display]
 

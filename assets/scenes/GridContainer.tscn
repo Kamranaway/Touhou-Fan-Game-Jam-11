@@ -21,6 +21,7 @@ grow_vertical = 2
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("1_4nick")
+expand_mode = 1
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
