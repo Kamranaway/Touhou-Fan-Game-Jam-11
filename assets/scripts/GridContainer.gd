@@ -449,7 +449,8 @@ func _input(event):
 			elif lock_y:
 				Input.warp_mouse(Vector2(lock_x_pos, event.global_position.y))
 
-func _on_slot_click(pos: Vector2):
-	if mouse_inside:
-		if lock_x == false and lock_y == false:
-			Input.warp_mouse(pos)
+func _on_slot_click(pos:Vector2, rect_pos: Vector2):
+	pass
+	#if mouse_inside:
+		#if lock_x == false and lock_y == false:
+			#Input.warp_mouse(pos)

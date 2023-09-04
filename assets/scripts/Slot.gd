@@ -65,4 +65,4 @@ func _on_texture_button_button_down():
 			BrushMenu.Brush.CROSS:
 				change_state(State.CROSS)
 				get_parent().check_board()
-	emit_signal("on_click", Vector2(global_position.x + 20, global_position.y + 20))
+	#emit_signal("on_click", Vector2(global_position.x + 20, global_position.y + 20))

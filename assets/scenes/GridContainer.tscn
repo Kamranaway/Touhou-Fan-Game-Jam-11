@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdxysjfs0abbj"]
 
-[ext_resource type="Texture2D" uid="uid://by2wyf7kwroa6" path="res://assets/sprites/tile_bg_thicker.png" id="1_4nick"]
 [ext_resource type="Script" path="res://assets/scripts/GridContainer.gd" id="1_8wvwg"]
+[ext_resource type="Texture2D" uid="uid://b7qfrjlxlayqq" path="res://assets/sprites/table.png" id="1_ukqct"]
 [ext_resource type="Texture2D" uid="uid://dmjw3jtwrq58t" path="res://assets/sprites/icon.svg" id="2_b3tsl"]
 
 [node name="MarginContainer" type="MarginContainer"]
@@ -20,7 +20,7 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_4nick")
+texture = ExtResource("1_ukqct")
 expand_mode = 1
 
 [node name="Panel" type="Panel" parent="."]

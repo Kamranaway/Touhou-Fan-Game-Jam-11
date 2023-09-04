@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsrf2rraabut2"]
+[gd_scene load_steps=4 format=3 uid="uid://bsrf2rraabut2"]
 
 [ext_resource type="Script" path="res://assets/scripts/Slot.gd" id="1_k1o08"]
 [ext_resource type="Texture2D" uid="uid://cl43wcsx1mdoa" path="res://assets/sprites/cross.png" id="2_a3n8u"]
+[ext_resource type="Texture2D" uid="uid://bspbphtwy1q3y" path="res://assets/sprites/Tile Square.png" id="2_h1hj7"]
 
 [node name="1" type="MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -20,6 +21,7 @@ script = ExtResource("1_k1o08")
 
 [node name="Frame" type="TextureRect" parent="."]
 layout_mode = 2
+texture = ExtResource("2_h1hj7")
 
 [node name="Cross" type="TextureRect" parent="."]
 visible = false

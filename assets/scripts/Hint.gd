@@ -9,16 +9,27 @@ func set_text(new_str: String):
 		set_text_visible(true)
 
 func set_edge(is_vertical: bool):
-	if is_vertical:
-		pass
-		# set it to the vertical edge texture
-	else: 
-		pass
-		# horiz. edge texture
+	pass
+	#if is_vertical:
+		#$VertEdge.visible = true
+	#	$EdgeHint.visible = false
+	#	$BlockHint.visible = false
+		#$VertBlockHint.visible = false
+	#else: 
+		#$VertEdge.visible = false
+	#	$EdgeHint.visible = true
+		#$BlockHint.visible = false
+	#	$VertBlockHint.visible = false
 
 func set_text_visible(is_visible: bool):
 	$CenterContainer/HintLabel.visible = is_visible
-	$TextureRect.visible = is_visible
+	#$BlockHint.visible = is_visible
+	#$Panel.visible = is_visible
+	#$EdgeHint.visible = false
+	#$VertBlockHint.visible = false
+	#$VertEdge.visible = false
+	
+	
 
 func grey_out(is_grey: bool):
 	if is_grey:
