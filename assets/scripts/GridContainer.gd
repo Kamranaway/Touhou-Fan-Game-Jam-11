@@ -74,9 +74,11 @@ func get_inputs():
 		match (entry_method):
 			EntryMethod.KEYBOARD:
 				entry_method = EntryMethod.KEYMOUSE
+				cursor.set_visible(false)
 				print('swapped to keymouse')
 			EntryMethod.KEYMOUSE:
 				entry_method = EntryMethod.KEYBOARD
+				cursor.set_visible(true)
 				print('swapped to keyboard')
 	
 	match (entry_method):
