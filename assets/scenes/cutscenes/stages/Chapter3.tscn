@@ -45,7 +45,8 @@ func stage_script():
 	Events.dialog(\"Doremy\", \"And what better way to do it than committing an even greater sin?\") 
 	Events.dialog(\"Sagume\", \"…?\")
 	
-	
+	Events.transition_out()
+	Events.change_scene(\"res://assets/scenes/MainMenu.tscn\")
 	#Events.change_scene(\"res://assets/scenes/levels/LevelBase.tscn\")
 "
 

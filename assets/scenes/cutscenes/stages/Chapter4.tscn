@@ -16,6 +16,9 @@ func stage_script():
 	Events.dialog(\"Doremy\", \"How amusing. For someone so stoic, you’re awfully expressive in your sleep. Although…\")
 	Events.dialog(\"Doremy\", \"That pained expression haunts you no longer. As I thought, a smile suits you. I never thought I’d get to see such a cute side of you.\")
 	Events.dialog(\"Doremy\", \"…hmhm.~ I’m glad you’re sleeping soundly, at least.  Sweet dreams, Sagume. Ah, and thank you for the snack\")
+	
+	Events.transition_out()
+	Events.change_scene(\"res://assets/scenes/MainMenu.tscn\")
 "
 
 [node name="TestStage" type="Node"]

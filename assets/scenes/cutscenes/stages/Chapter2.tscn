@@ -34,7 +34,9 @@ func stage_script():
 	Events.dialog(\"Doremy\", \"Regardless, it seems they cannot risk you falling out of their grasp. You're certainly more important than you've made it seem\")
 	Events.dialog(\"Sagume\", \"Perhaps I do have that privilege... if one could call it that.\")
 	Events.dialog(\"Doremy\", \"Haha... privilege, is it? I wonder. Were I in your shoes, I would almost consider it a curse.\")
-
+	
+	Events.transition_out()
+	Events.change_scene(\"res://assets/scenes/MainMenu.tscn\")
 	#Events.change_scene(\"res://assets/scenes/levels/LevelBase.tscn\")
 "
 

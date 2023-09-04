@@ -25,7 +25,7 @@ func stage_script():
 	Events.dialog(\"Doremy\", \"I can’t help but wonder if she knows what awaits her… what she’s done is sacrilege.\")
 	
 	Events.transition_out()
-	
+	Events.change_scene(\"res://assets/scenes/MainMenu.tscn\")
 "
 
 [node name="TestStage" type="Node"]
