@@ -48,21 +48,21 @@ func _on_mouse_entered():
 		match (get_parent().current_brush):
 			BrushMenu.Brush.FILL:
 				change_state(State.FILLED)
-				get_parent().update_hint_panels()
+				get_parent().check_board()
 			BrushMenu.Brush.EMPTY:
 				change_state(State.EMPTY)
 			BrushMenu.Brush.CROSS:
 				change_state(State.CROSS)
-				get_parent().update_hint_panels()
+				get_parent().check_board()
 
 func _on_texture_button_button_down():
 	match (get_parent().current_brush):
 			BrushMenu.Brush.FILL:
 				change_state(State.FILLED)
-				get_parent().update_hint_panels()
+				get_parent().check_board()
 			BrushMenu.Brush.EMPTY:
 				change_state(State.EMPTY)
 			BrushMenu.Brush.CROSS:
 				change_state(State.CROSS)
-				get_parent().update_hint_panels()
+				get_parent().check_board()
 	emit_signal("on_click", Vector2(global_position.x + 20, global_position.y + 20))

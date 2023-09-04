@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdxysjfs0abbj"]
+[gd_scene load_steps=4 format=3 uid="uid://cdxysjfs0abbj"]
 
 [ext_resource type="Script" path="res://assets/scripts/GridContainer.gd" id="1_8wvwg"]
+[ext_resource type="Script" path="res://assets/scripts/MarginContainer.gd" id="1_lljmw"]
 [ext_resource type="Texture2D" uid="uid://dmjw3jtwrq58t" path="res://assets/sprites/icon.svg" id="2_b3tsl"]
 
 [node name="MarginContainer" type="MarginContainer"]
@@ -16,6 +17,7 @@ offset_right = 400.0
 offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lljmw")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
@@ -37,3 +39,4 @@ texture = ExtResource("2_b3tsl")
 
 [connection signal="mouse_entered" from="GridContainer" to="GridContainer" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="GridContainer" to="GridContainer" method="_on_mouse_exited"]
+[connection signal="solved" from="GridContainer" to="." method="_on_grid_container_solved"]

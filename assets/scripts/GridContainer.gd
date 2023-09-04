@@ -1,5 +1,9 @@
 extends GridContainer
 
+signal update_margin
+
+signal solved
+
 var cursor_pos = Vector2.ZERO
 
 @export var size_x := 15
@@ -23,16 +27,43 @@ var lock_y_pos = 0
 
 var mouse_inside = false
 
-signal update_margin
+var solution = TEST_PUZZLE
 
-# Called when the node enters the scene tree for the first time.
+const TEST_PUZZLE = [
+	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
+	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
+	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
+	[1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0 ,0],
+	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,1 ,0],
+	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0],
+	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,1 ,0],
+	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,0 ,0 ,1],
+	[1 ,0 ,0 ,0 ,1 ,0 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,0 ,1],
+	[1 ,0 ,0 ,0 ,0 ,1 ,0 ,0 ,1 ,1 ,0 ,0 ,1 ,1 ,1],
+	[1 ,1 ,1 ,1 ,0 ,1 ,0 ,1 ,1 ,1 ,1 ,1 ,0 ,0 ,0],
+	[1 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
+	[1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
+	[1 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,1 ,1 ,1 ,0 ,0 ,0 ,0],
+	[0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0]]
+
+
+func _init(solution):
+	pass
+	
+func fuck():
+	print('ballz')
+	
 func _ready():
+	start_game(solution)
+
+func start_game(_solution):
+	solution = _solution
 	for panel in get_tree().get_nodes_in_group("hint_panel"):
 		if !panel.is_left:
 			panel.hint_panel_size = size_x
 		else:
 			panel.hint_panel_size = size_y
-		panel.update_panel_size()
+		panel.update_panel_size(solution)
 	
 	self.columns = size_x
 	
@@ -79,13 +110,13 @@ func get_inputs():
 				var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
 				#tile.set_state(tile.State.FILLED)
 				if tile.change_state(tile.State.FILLED):
-					update_hint_panels()
+					check_board()
 			
 			if Input.is_action_just_pressed("place_cross"):
 				var tile = get_grid_tile(cursor_pos.x, cursor_pos.y)
 				#tile.set_state(tile.State.CROSS)
 				if tile.change_state(tile.State.CROSS):
-					update_hint_panels()
+					check_board()
 			
 			if Input.is_action_just_pressed("cursor_right"):
 				cursor_pos.x += 1
@@ -113,9 +144,23 @@ func get_inputs():
 			else:
 				current_brush = BrushMenu.Brush.EMPTY
 				#print('using empty brush')
-				
-			
-func update_hint_panels():
+
+func check_board():
+	var board_state = get_board_state()
+	var solved = true
+	for r in range(solution.size()):
+		for c in range(solution[0].size()):
+			if (board_state[r][c] == 1 && solution[r][c] != 1) || (board_state[r][c] != 1 && solution[r][c] == 1):
+				solved = false
+				break
+	if !solved:
+		update_hint_panels(board_state)
+	else:
+		print('puzzle solved')
+		emit_signal('solved')
+	
+
+func update_hint_panels(board_state):
 	# get separate nodes for the top and left panels
 	var hint_panel_left
 	var hint_panel_top
@@ -126,7 +171,6 @@ func update_hint_panels():
 			hint_panel_top = hint_panel
 	var col_hints = hint_panel_top.col_hints
 	var row_hints = hint_panel_top.row_hints
-	var board_state = get_board_state()
 	var col_coord_list = []
 	var row_coord_list = []
 	
@@ -403,7 +447,6 @@ func _process(delta):
 		lock_x = false
 		lock_y = false
 	last_mouse_pos = get_global_mouse_position()
-
 
 func _on_mouse_entered():
 	mouse_inside = true
