@@ -10,6 +10,7 @@ func set_text(new_str: String):
 
 func set_text_visible(is_visible: bool):
 	$CenterContainer/HintLabel.visible = is_visible
+	$TextureRect.visible = is_visible
 
 func grey_out(is_grey: bool):
 	if is_grey:

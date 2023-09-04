@@ -1,19 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://bah881sb8jhbm"]
+[gd_scene load_steps=7 format=3 uid="uid://bah881sb8jhbm"]
 
 [ext_resource type="Script" path="res://assets/scripts/LevelBase.gd" id="1_0suwq"]
 [ext_resource type="PackedScene" uid="uid://dp2n107kvcm84" path="res://assets/scenes/Puzzle.tscn" id="2_h5j4y"]
 [ext_resource type="PackedScene" uid="uid://bjej3sg8x5qid" path="res://assets/scenes/BrushMenu.tscn" id="3_8bxj8"]
+[ext_resource type="Texture2D" uid="uid://dy5dn4ph467ch" path="res://assets/sprites/puzzle_bg.png" id="3_a8huv"]
 [ext_resource type="PackedScene" uid="uid://cxe3afp8xt84o" path="res://assets/scenes/Timer.tscn" id="4_uvmx4"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_0mnk1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_s8lgx"]
 
 [node name="LevelBase" type="Node"]
 script = ExtResource("1_0suwq")
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 940.0
+offset_top = 520.0
+offset_right = 980.0
+offset_bottom = 560.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PuzzleBg" type="Sprite2D" parent="CenterContainer"]
+position = Vector2(-940, -520)
+texture = ExtResource("3_a8huv")
+
 [node name="Puzzle" parent="." instance=ExtResource("2_h5j4y")]
 
 [node name="BrushMenu" parent="." instance=ExtResource("3_8bxj8")]
-button_group = SubResource("ButtonGroup_0mnk1")
+button_group = SubResource("ButtonGroup_s8lgx")
 
 [node name="Timer" parent="." instance=ExtResource("4_uvmx4")]
 
