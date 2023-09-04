@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7n78y5xr7gj5"]
+
+[sub_resource type="GDScript" id="GDScript_vwixe"]
+script/source = "extends StageBase
+
+func stage_script():
+	#init
+	Events.load_background(\"puzzle_bg\")
+	Events.add_actor(\"ch1\")
+	Events.add_actor(\"Doremy\")
+	Events.add_actor(\"SagumePast\")
+
+	
+	Events.transition_in()
+	#Acting
+	Events.dialog(\"Doremy\", \"...\")
+	Events.dialog(\"Sagume\", \"Aha, now what have we here? Curious…\")
+	Events.dialog(\"Doremy\", \"( Sagume… everything about her seems different, somehow. How odd. )\")
+	Events.dialog(\"Doremy\", \"That poor pheasant… perhaps she used to enjoy hunting?\")
+	Events.dialog(\"Sagume\", \"...\")
+	Events.dialog(\"Sagume\", \"What business has a baku here?\")
+	Events.dialog(\"Doremy\", \"I’m just passing by. Pay me no mind.\")
+	Events.dialog(\"Sagume\", \" “Passing by”..?\")
+	Events.dialog(\"Doremy\", \"Exactly. You needn’t worry, I have no plans to interfere. Excuse me.\")
+	Events.dialog(\"Doremy\", \"I can’t help but wonder if she knows what awaits her… what she’s done is sacrilege.\")
+	
+	Events.transition_out()
+	
+"
+
+[node name="TestStage" type="Node"]
+script = SubResource("GDScript_vwixe")

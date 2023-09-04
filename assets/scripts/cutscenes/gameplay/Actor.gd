@@ -16,7 +16,7 @@ class_name Actor
 @onready var STAGE_X_LEFT := get_viewport_rect().size.x / 4
 @onready var STAGE_X_CENTER := get_viewport_rect().size.x / 2
 @onready var STAGE_X_RIGHT := (get_viewport_rect().size.x / 4) * 3
-@onready var STAGE_Y_CENTER := get_viewport_rect().size.y/2
+@onready var STAGE_Y_CENTER := (get_viewport_rect().size.y/2) + 100
 
 enum StartingPosition {Left, Center, Right}
 @export var starting_position: StartingPosition = StartingPosition.Center

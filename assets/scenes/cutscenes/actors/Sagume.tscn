@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5gi4gq7pw4jh"]
+
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="1_d1c8s"]
+[ext_resource type="Texture2D" uid="uid://b13on4dcawisg" path="res://assets/sprites/characters/Sagume_9.png" id="2_5hbqa"]
+
+[node name="TestActor" type="Sprite2D"]
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_d1c8s")
+actor_name = "Sagume"
+pose_list = Array[Texture]([ExtResource("2_5hbqa")])
+starting_position = 2

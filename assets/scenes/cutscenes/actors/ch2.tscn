@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://fjb5fopdf7xc"]
+
+[ext_resource type="Texture2D" uid="uid://bvbp56xlfk0hq" path="res://assets/sprites/chapter2.png" id="1_h3veo"]
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="2_ejq55"]
+
+[node name="TestActor" type="Sprite2D"]
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("1_h3veo")
+script = ExtResource("2_ejq55")
+actor_name = "ch2"
+pose_list = Array[Texture]([ExtResource("1_h3veo")])

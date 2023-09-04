@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1tms4tlfpbwa"]
+
+[ext_resource type="Texture2D" uid="uid://dn0xe0on83iej" path="res://assets/sprites/chapter1.png" id="1_tm5l1"]
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="2_w5jsn"]
+
+[node name="TestActor" type="Sprite2D"]
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("1_tm5l1")
+script = ExtResource("2_w5jsn")
+actor_name = "ch1"
+pose_list = Array[Texture]([ExtResource("1_tm5l1")])

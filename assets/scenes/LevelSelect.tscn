@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://bgevqhirqou7j"]
+[gd_scene load_steps=6 format=3 uid="uid://bgevqhirqou7j"]
+
+[ext_resource type="Texture2D" uid="uid://dvjbt4rood8co" path="res://assets/sprites/UnlockedStage.png" id="1_6op2b"]
+[ext_resource type="Texture2D" uid="uid://dy5dn4ph467ch" path="res://assets/sprites/puzzle_bg.png" id="1_nvb7o"]
+[ext_resource type="Script" path="res://assets/scripts/LevelSelect.gd" id="1_yih2s"]
+[ext_resource type="Texture2D" uid="uid://dc4v667383txt" path="res://assets/sprites/LockedStage.png" id="2_ukshp"]
+[ext_resource type="Texture2D" uid="uid://4aifjtjer740" path="res://assets/sprites/hover.png" id="3_n0ymt"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -7,6 +13,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_yih2s")
+
+[node name="PuzzleBg" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_nvb7o")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -22,9 +33,70 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="one" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
-text = "Level"
+texture_normal = ExtResource("1_6op2b")
+texture_hover = ExtResource("3_n0ymt")
+texture_disabled = ExtResource("2_ukshp")
+stretch_mode = 3
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="two" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer2/MarginContainer2"]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_6op2b")
+texture_hover = ExtResource("3_n0ymt")
+texture_disabled = ExtResource("2_ukshp")
+stretch_mode = 3
+
+[node name="HBoxContainer3" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CenterContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="three" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer3/MarginContainer3"]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_6op2b")
+texture_hover = ExtResource("3_n0ymt")
+texture_disabled = ExtResource("2_ukshp")
+stretch_mode = 3
+
+[node name="HBoxContainer4" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="CenterContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="four" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer4/MarginContainer4"]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_6op2b")
+texture_hover = ExtResource("3_n0ymt")
+texture_disabled = ExtResource("2_ukshp")
+stretch_mode = 3
+
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer/MarginContainer/one" to="." method="_on__button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer2/MarginContainer2/two" to="." method="_on__button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer3/MarginContainer3/three" to="." method="_on__button_down"]
+[connection signal="button_down" from="CenterContainer/VBoxContainer/HBoxContainer4/MarginContainer4/four" to="." method="_on__button_down"]

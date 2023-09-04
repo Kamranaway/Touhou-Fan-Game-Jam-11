@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxi0froiys8bd"]
+
+[sub_resource type="GDScript" id="GDScript_vwixe"]
+script/source = "extends StageBase
+
+func stage_script():
+	#init
+	Events.load_background(\"puzzle_bg\")
+	
+	
+	Events.add_actor(\"Doremy\")
+	Events.add_actor(\"ch4\")
+	
+	Events.transition_in()
+	Events.dialog(\"Doremy\", \"Ahuh… have my words reached you in there? You certainly seem more content than before.\")
+	Events.dialog(\"Doremy\", \"How amusing. For someone so stoic, you’re awfully expressive in your sleep. Although…\")
+	Events.dialog(\"Doremy\", \"That pained expression haunts you no longer. As I thought, a smile suits you. I never thought I’d get to see such a cute side of you.\")
+	Events.dialog(\"Doremy\", \"…hmhm.~ I’m glad you’re sleeping soundly, at least.  Sweet dreams, Sagume. Ah, and thank you for the snack\")
+"
+
+[node name="TestStage" type="Node"]
+script = SubResource("GDScript_vwixe")

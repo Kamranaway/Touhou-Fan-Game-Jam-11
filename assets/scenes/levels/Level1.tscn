@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhqsvlid8piv7"]
+
+[ext_resource type="PackedScene" uid="uid://bqii02w2dcs6l" path="res://assets/scenes/levels/LevelBase.tscn" id="1_hk0oe"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_5f681"]
+
+[sub_resource type="GDScript" id="GDScript_y1k10"]
+script/source = "extends Node
+
+const TEST_PUZZLE = []
+"
+
+[node name="LevelBase" instance=ExtResource("1_hk0oe")]
+
+[node name="BrushMenu" parent="." index="2"]
+button_group = SubResource("ButtonGroup_5f681")
+
+[node name="PuzzleData" parent="." index="4"]
+script = SubResource("GDScript_y1k10")
+
+[editable path="Puzzle"]
+[editable path="Puzzle/Grid/VBoxContainer/VFlowContainer/LeftHintPanel"]
+[editable path="Puzzle/Grid/VBoxContainer/VFlowContainer/GridContainer"]

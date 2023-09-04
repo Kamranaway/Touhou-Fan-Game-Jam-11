@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://d13lxtnf3txym"]
+
+[sub_resource type="GDScript" id="GDScript_vwixe"]
+script/source = "extends StageBase
+
+func stage_script():
+	#init
+	Events.load_background(\"puzzle_bg\")
+	
+	Events.add_actor(\"ch2\")
+	Events.add_actor(\"Doremy\")
+	Events.add_actor(\"SagumeMid\")
+	
+	Events.transition_in()
+	
+	Events.dialog(\"Doremy\", \"...!\")
+	Events.dialog(\"Doremy\", \"( An eye for an eye—or a wing, in this case. How awful. )\")
+	Events.dialog(\"Doremy\", \"( You poor thing. I suppose this is your just deserts. )\")
+	Events.dialog(\"Doremy\", \"( …I’d best not intervene here. Not yet. )\")
+	Events.dialog(\"Doremy\", \"...\")
+	Events.dialog(\"Sagume\", \"Ah… it’s you again.\")
+	Events.dialog(\"Doremy\", \"Oh, you remember. I take it you've had a moment to recover?\")
+	Events.dialog(\"Sagume\", \" . . . . . . \")
+	Events.dialog(\"Doremy\", \"Chatty as ever. \")
+	Events.dialog(\"Doremy\", \"…a joke in bad taste. Let me ask plainly: are you alright?\")
+	Events.dialog(\"Sagume\", \"…no. I could not possibly be.\")
+	Events.dialog(\"Doremy\", \"Haha. Of course not. My condolences.\")
+	Events.dialog(\"Doremy\", \"Allow me to ask, then: what possessed you to act that day?\")
+	Events.dialog(\"Sagume\", \" “Possessed me”..? It was of my own volition. I-- They were always trying to pry... meddle in affairs that did not involve them.\")
+	Events.dialog(\"Doremy\", \"And so reckoning fell upon not only you, but that poor girl beside you....you poor thing.\")
+	Events.dialog(\"Sagume\", \" I do not need to be pitied. Something like this... was fated to happen. My own pride blinded me.\")
+	Events.dialog(\"Doremy\", \"...indeed. Spurning the gods is not without its consequences — and yet still you walk among them, Ame-no-Sagume.\")
+	Events.dialog(\"Sagume\", \"..to them, I do not walk on equal ground. And now, even less so.\")
+	Events.dialog(\"Doremy\", \"Regardless, it seems they cannot risk you falling out of their grasp. You're certainly more important than you've made it seem\")
+	Events.dialog(\"Sagume\", \"Perhaps I do have that privilege... if one could call it that.\")
+	Events.dialog(\"Doremy\", \"Haha... privilege, is it? I wonder. Were I in your shoes, I would almost consider it a curse.\")
+
+	#Events.change_scene(\"res://assets/scenes/levels/LevelBase.tscn\")
+"
+
+[node name="TestStage" type="Node"]
+script = SubResource("GDScript_vwixe")

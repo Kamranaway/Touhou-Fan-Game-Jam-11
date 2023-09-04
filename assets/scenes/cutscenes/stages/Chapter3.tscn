@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://mwlg24urh7dc"]
+
+[sub_resource type="GDScript" id="GDScript_vwixe"]
+script/source = "extends StageBase
+
+func stage_script():
+	#init
+	Events.load_background(\"puzzle_bg\")
+	
+	Events.add_actor(\"ch3\")
+	Events.add_actor(\"Doremy\")
+	Events.add_actor(\"Sagume\")
+	
+	Events.transition_in()
+	
+	Events.dialog(\"Doremy\", \"( Aha, now that is the Sagume I remember.~ )\")
+	Events.dialog(\"Doremy\", \"Lovely way to spend a weekend, isn’t it?\")
+	Events.dialog(\"Sagume\", \"!!!\")
+	Events.dialog(\"Sagume\", \"Must you announce your presence so obnoxiously?\")
+	Events.dialog(\"Doremy\", \"Someone has to keep your life interesting, hm? I would say your day-to-day affairs are less entertaining than paint drying on the wall.\")
+	Events.dialog(\"Sagume\", \". . . . .\")
+	Events.dialog(\"Doremy\", \". . . . .\")
+	Events.dialog(\"Doremy\", \"Anywho…\")
+	Events.dialog(\"Doremy\", \"This all seems a bit excessive, doesn’t it?\")
+	Events.dialog(\"Sagume\", \"There has been quite a bit of instability ever since my colleague fled. I have been left to help assume some of her duties, to lessen the load on the other sages.\")
+	Events.dialog(\"Doremy\", \"“Lessen the load”... and by that, I assume you mean you’ve been left to do close to everything.\")
+	Events.dialog(\"Sagume\", \" . . . . .\")
+	Events.dialog(\"Doremy\", \"Your silence speaks volumes. For how much longer do you intend to be treated this way? \")
+	Events.dialog(\"Sagume\", \"…however long it takes.\")
+	Events.dialog(\"Doremy\", \"You seek atonement.\")
+	Events.dialog(\"Sagume\", \"I never implied it.\")
+	Events.dialog(\"Doremy\", \"You need not imply. I’ve got a much better read on you than you’re prepared to admit.\")
+	Events.dialog(\"Sagume\", \". . . \")
+	Events.dialog(\"Sagume\", \"Yes, I confess. Even though so much time has passed, I have struggled to be viewed favorably. Should the need to aid my people arise, I will be there. It is the least I can do.\")
+	Events.dialog(\"Sagume\", \"Things have not been the same since Lady Yagokoro and Princess Kaguya refused to return. I am still picking up the pieces.\")
+	Events.dialog(\"Doremy\", \"Ah.. It’s about the time I must ask: have you thought about why they left?\")
+	Events.dialog(\"Doremy\", \"For someone to abandon the civilization they spent millennia building — surely it piques your curiosity.\")
+	Events.dialog(\"Sagume\", \"It… does, yes.\")
+	Events.dialog(\"Doremy\", \"When I observed you on Earth, you seemed so much more free. Your wings were spread so wide, and you had an aura about you that I’d never seen before. But when I look at you now..\")
+	Events.dialog(\"Doremy\", \"I see a bird locked in a cage.\")
+	Events.dialog(\"Sagume\", \". . . . .\")
+	Events.dialog(\"Doremy\", \"Perhaps, then, your friends on Earth realized the same thing. A life of eternity means nothing if you spend it wallowing in misery, even if you refuse to acknowledge it.\")
+	Events.dialog(\"Doremy\", \"The Lunarians vehemently reject impurity — but the way I view it, it’s as if they reject freedom itself.\")
+	Events.dialog(\"Doremy\", \"Deep down… it doesn’t sound so bad, does it? Finally breaking those chains.\")  
+	Events.dialog(\"Doremy\", \"And what better way to do it than committing an even greater sin?\") 
+	Events.dialog(\"Sagume\", \"…?\")
+	
+	
+	#Events.change_scene(\"res://assets/scenes/levels/LevelBase.tscn\")
+"
+
+[node name="TestStage" type="Node"]
+script = SubResource("GDScript_vwixe")

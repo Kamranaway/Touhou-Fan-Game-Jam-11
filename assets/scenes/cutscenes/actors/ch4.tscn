@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm38odwmsjl6v"]
+
+[ext_resource type="Texture2D" uid="uid://bvvj3vcivsj0q" path="res://assets/sprites/doresagu menu image.png" id="1_ni2q3"]
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="2_fynmt"]
+
+[node name="TestActor" type="Sprite2D"]
+position = Vector2(988, 520)
+texture = ExtResource("1_ni2q3")
+script = ExtResource("2_fynmt")
+actor_name = "ch4"
+pose_list = Array[Texture]([ExtResource("1_ni2q3")])

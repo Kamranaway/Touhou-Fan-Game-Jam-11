@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6cjxej8ltry5"]
+
+[ext_resource type="Script" path="res://assets/scripts/cutscenes/gameplay/Actor.gd" id="1_jbuuj"]
+[ext_resource type="Texture2D" uid="uid://bprhtpo2fgvpt" path="res://assets/sprites/characters/dorb1.png" id="2_qrwe8"]
+
+[node name="TestActor" type="Sprite2D"]
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_jbuuj")
+actor_name = "Doremy"
+pose_list = Array[Texture]([ExtResource("2_qrwe8")])
+starting_position = 0
