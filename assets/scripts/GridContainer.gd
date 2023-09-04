@@ -158,6 +158,8 @@ func update_hint_panels(board_state):
 	for c in range(size_x):
 		var hint_size = col_hints[c].size() # used a lot so make it a var
 		# purely empty column
+		if col_hints[c].size() == 0:
+			continue
 		if col_runs[c].size() == 1:
 			print('empty col! @c = ' + str(c))
 			# ... AND we were expecting a pure empty column
@@ -213,9 +215,11 @@ func update_hint_panels(board_state):
 	# rows 
 	for r in range(size_y):
 		var hint_size = row_hints[r].size()
+		if row_hints[r].size() == 0:
+			continue
 		if row_runs[r].size() == 1:
 			print('empty row! @r = ' + str(r))
-			if col_hints[r][0] == 0:
+			if row_hints[r][0] == 0:
 				row_coord_list.append(Vector2(MAX_HINTS - 1, r))
 			continue
 		print('nonempty row! @r = ' + str(r))

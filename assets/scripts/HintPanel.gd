@@ -57,7 +57,8 @@ func write_hints():
 	if !is_left: 
 		#print(col_hints)
 		for col in range(col_hints.size()):
-			set_index_edge(col, MAX_HINTS - col_hints[col].size(), true)
+			if col_hints[col].size() > 0:
+				set_index_edge(col, MAX_HINTS - col_hints[col].size(), true)
 			for i in range(col_hints[col].size()):
 				#print(str(col) + ", " + str(i + (MAX_HINTS - col_hints[col].size())))
 				set_index_str(col, i + (MAX_HINTS - col_hints[col].size()), str(col_hints[col][i]))
@@ -65,7 +66,8 @@ func write_hints():
 	else:
 		#print(row_hints)
 		for row in range(row_hints.size()):
-			set_index_edge(MAX_HINTS - row_hints[row].size(), row, false)
+			if row_hints[row].size() > 0:
+				set_index_edge(MAX_HINTS - row_hints[row].size(), row, false)
 			for i in range(row_hints[row].size()):
 				set_index_str(i + (MAX_HINTS - row_hints[row].size()), row, str(row_hints[row][i]))
 					

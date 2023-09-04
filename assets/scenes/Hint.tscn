@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://2n33hofdmtvk"]
+[gd_scene load_steps=2 format=3 uid="uid://2n33hofdmtvk"]
 
 [ext_resource type="Script" path="res://assets/scripts/Hint.gd" id="1_lme53"]
-[ext_resource type="Texture2D" path="res://assets/sprites/horizontal_hint_tile.png" id="2_cauqs"]
 
 [node name="Hint" type="MarginContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -14,7 +13,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_cauqs")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
